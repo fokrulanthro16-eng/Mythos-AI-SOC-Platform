@@ -576,3 +576,135 @@ def test_get_incident_trend_missing_file_returns_empty_window(patch_incidents):
     result = es.get_incident_trend(7)
     assert len(result) == 7
     assert all(r["count"] == 0 for r in result)
+
+
+# ---------------------------------------------------------------------------
+# filter_incidents
+# ---------------------------------------------------------------------------
+
+
+def test_filter_incidents_no_filters():
+    incs = [_inc(), _inc()]
+    assert len(es.filter_incidents(incs)) == 2
+
+
+def test_filter_incidents_by_severity():
+    incs = [_inc(severity="CRITICAL"), _inc(severity="HIGH"), _inc(severity="LOW")]
+    result = es.filter_incidents(incs, severities=["CRITICAL"])
+    assert len(result) == 1
+    assert result[0]["severity"] == "CRITICAL"
+
+
+def test_filter_incidents_by_date_from():
+    from datetime import timezone
+    now   = datetime.now(timezone.utc)
+    old   = now - timedelta(days=10)
+    new   = now - timedelta(days=1)
+    incs  = [
+        _inc(created_at=_iso(old)),
+        _inc(created_at=_iso(new)),
+    ]
+    cutoff = now - timedelta(days=5)
+    result = es.filter_incidents(incs, date_from=cutoff)
+    assert len(result) == 1
+
+
+def test_filter_incidents_by_date_to():
+    from datetime import timezone
+    now  = datetime.now(timezone.utc)
+    old  = now - timedelta(days=10)
+    new  = now - timedelta(days=1)
+    incs = [
+        _inc(created_at=_iso(old)),
+        _inc(created_at=_iso(new)),
+    ]
+    cutoff = now - timedelta(days=5)
+    result = es.filter_incidents(incs, date_to=cutoff)
+    assert len(result) == 1
+
+
+def test_filter_incidents_empty():
+    assert es.filter_incidents([]) == []
+
+
+def test_filter_incidents_multiple_severities():
+    incs = [
+        _inc(severity="CRITICAL"),
+        _inc(severity="HIGH"),
+        _inc(severity="LOW"),
+    ]
+    result = es.filter_incidents(incs, severities=["CRITICAL", "HIGH"])
+    assert len(result) == 2
+
+
+# ---------------------------------------------------------------------------
+# _compute_mitre_coverage
+# ---------------------------------------------------------------------------
+
+
+def test_compute_mitre_coverage_empty():
+    result = es._compute_mitre_coverage([])
+    assert isinstance(result, list)
+    assert len(result) == 12  # 12 tactics always present
+    assert all(r["techniques"] == 0 for r in result)
+
+
+def test_compute_mitre_coverage_counts_unique_techniques():
+    incs = [
+        {"attack_techniques": [
+            {"technique_id": "T1486", "tactic": "impact"},
+            {"technique_id": "T1490", "tactic": "impact"},
+        ]},
+        {"attack_techniques": [
+            {"technique_id": "T1486", "tactic": "impact"},  # duplicate
+        ]},
+    ]
+    result = es._compute_mitre_coverage(incs)
+    impact = next(r for r in result if r["tactic_id"] == "impact")
+    assert impact["techniques"] == 2  # T1486 and T1490, not 3
+
+
+def test_compute_mitre_coverage_all_tactics_present():
+    result = es._compute_mitre_coverage([])
+    tactic_ids = {r["tactic_id"] for r in result}
+    expected = {
+        "initial-access", "execution", "persistence", "privilege-escalation",
+        "defense-evasion", "credential-access", "discovery", "lateral-movement",
+        "collection", "exfiltration", "command-and-control", "impact",
+    }
+    assert expected == tactic_ids
+
+
+def test_compute_mitre_coverage_unknown_tactic_ignored():
+    incs = [{"attack_techniques": [
+        {"technique_id": "T9999", "tactic": "fictional-tactic"},
+    ]}]
+    result = es._compute_mitre_coverage(incs)
+    assert all(r["techniques"] == 0 for r in result)
+
+
+def test_compute_mitre_coverage_multiple_tactics():
+    incs = [{"attack_techniques": [
+        {"technique_id": "T1566", "tactic": "initial-access"},
+        {"technique_id": "T1059", "tactic": "execution"},
+        {"technique_id": "T1486", "tactic": "impact"},
+    ]}]
+    result = es._compute_mitre_coverage(incs)
+    covered = [r for r in result if r["techniques"] > 0]
+    assert len(covered) == 3
+
+
+# ---------------------------------------------------------------------------
+# _compute_executive_kpis total_incidents
+# ---------------------------------------------------------------------------
+
+
+def test_compute_executive_kpis_total_incidents():
+    incs = [_inc(), _inc(), _inc()]
+    kpis = es._compute_executive_kpis(incs, [], [], [])
+    assert kpis["total_incidents"] == 3
+
+
+def test_compute_executive_kpis_total_incidents_empty():
+    kpis = es._compute_executive_kpis([], [], [], [])
+    assert kpis["total_incidents"] == 0

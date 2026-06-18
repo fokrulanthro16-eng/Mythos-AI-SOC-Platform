@@ -502,10 +502,115 @@ GET    /metrics                    Prometheus metrics (no auth)
 | `test_attack_engine.py` | 14 | AttackEngine lazy singleton |
 | `test_workbench_store.py` | 22 | Workbench assignment/note/escalation |
 | `test_agent_store.py` | 18 | Agent run store + seed |
-| `test_executive_store.py` | 61 | Executive KPI compute + file-backed wrappers |
+| `test_executive_store.py` | 79 | Executive KPI compute, filters, MITRE coverage |
 | `test_report_builder.py` | 34 | PDF builder, recommendations, assemble_report_data |
 | `test_threat_actor_store.py` | 62 | Threat actor store, pure compute, search/filter |
-| **Total** | **588** | |
+| `test_validators.py` | 72 | Incident/campaign/case/analyst validators + dataset |
+| `test_production_dataset.py` | 37 | Data integrity: 50 incidents, 10 analysts, campaigns |
+| **Total** | **795** | |
+
+---
+
+## Production Dataset
+
+Phase 7.1 ships a fully enriched SOC dataset that drives all dashboard views:
+
+### Incidents (`data/sample_incidents.json`)
+
+50 realistic enterprise incidents spanning 30 days, covering all 10 threat categories:
+
+| Category | Incidents | Example Threats |
+|---|---|---|
+| Ransomware | 13 | LockBit 4.0, BlackCat/ALPHV, Akira, PLAY, Rhysida |
+| Command & Control | 9 | Cobalt Strike, Brute Ratel C4, Sliver, Havoc, Mythic |
+| Data Exfiltration | 7 | Cl0p MOVEit-style, TA505 FTP, Scattered Spider Azure |
+| Lateral Movement | 5 | Mimikatz PTH, Kerberoasting, RDP brute-force, WMIC |
+| Credential Theft | 5 | EvilGinx2 AITM, Midnight Blizzard OAuth, Storm-0558 |
+| Phishing / Malware | 5 | DarkGate, QakBot, BumbleBee, Emotet, Carbanak |
+| Nation-State LOTL | 3 | Volt Typhoon, APT28, APT29 |
+| Insider Threat | 1 | Contractor USB staging |
+| Crypto / Supply Chain | 2 | Lazarus TraderTraitor, npm backdoor |
+
+Each incident includes:
+- Realistic MITRE ATT&CK techniques (3–6 per incident, 47 unique technique IDs)
+- Confidence score, risk score, attribution confidence (0.0–1.0)
+- Analyst assignment (one of 10 SOC analysts)
+- Status progression (DETECTED → INVESTIGATING → CONTAINED → MITIGATED → RESOLVED)
+- IOC enrichments, mitigation actions, AI threat summary
+
+### Analysts (`data/analysts.json`)
+
+10 SOC analysts with realistic profiles:
+
+| Name | Tier | Specialization |
+|---|---|---|
+| Sarah Kim | Tier 3 | Ransomware, IR, Forensics |
+| James Okafor | Tier 3 | Critical Infrastructure, OT/ICS |
+| Elena Vasquez | Tier 2 | Identity & Access, Phishing, BEC |
+| Priya Nair | Tier 3 | APT Tracking, Threat Intelligence |
+| Nia Thompson | Tier 2 | Financial Threat Actors, Crypto |
+| Carlos Mendez | Tier 3 | Data Exfiltration, Compliance |
+| Marcus Webb | Tier 2 | C2 Detection, Network Forensics |
+| Aisha Patel | Tier 2 | Endpoint Detection, Lateral Movement |
+| Tom Brandt | Tier 1 | Triage, Alert Monitoring |
+| Ryan O'Brien | Tier 2 | Nation-State Threats, LOTL |
+
+---
+
+## Executive Dashboard
+
+**Page 10 · `dashboard/pages/10_Executive_Dashboard.py`**
+
+A C-suite / CISO command view with live date-range and severity filters applied to all metrics.
+
+### KPI Cards (8)
+
+| KPI | Source |
+|---|---|
+| Total Incidents | Count of incidents in selected range |
+| Critical Incidents | Severity == CRITICAL in selected range |
+| Open Cases | Active cases (all time) |
+| Active Campaigns | Distinct campaigns in selected range |
+| MTTD | Severity-weighted detection time model |
+| MTTR | Mean hours to resolve closed cases |
+| Analyst Utilization | Active assignments as % of capacity |
+| Avg Attribution Conf | Mean AttributionAgent confidence |
+
+### Visualizations (7)
+
+- **Incident Trend** — Area chart for selected date window
+- **Severity Distribution** — Donut chart (CRITICAL / HIGH / MEDIUM / LOW)
+- **Case Status Distribution** — Bar chart by status
+- **Threat Category Breakdown** — Horizontal bar (8 categories)
+- **Campaign Activity** — Top 10 campaigns by incident count
+- **Threat Actor Attribution** — Donut chart by actor family
+- **MITRE ATT&CK Coverage** — Bar chart showing unique techniques per tactic
+
+### Filters
+
+- **Date range** — From / To date pickers + quick range buttons (7d, 30d, 90d, All time)
+- **Severity** — Multi-select (CRITICAL, HIGH, MEDIUM, LOW)
+- **Export** — Download KPI Summary as CSV
+
+### Launch
+
+```bash
+streamlit run dashboard/app.py
+# Navigate to: Executive Dashboard (page 10 in sidebar)
+```
+
+### Sample KPI Output (30-day window, all severities)
+
+```
+Total Incidents:       50
+Critical Incidents:    11
+Open Cases:            10
+Active Campaigns:      20
+MTTD:                  7.4 hrs
+MTTR:                  72.0 hrs
+Analyst Utilization:   16.0%
+Avg Attribution Conf:  75.0%
+```
 
 ---
 

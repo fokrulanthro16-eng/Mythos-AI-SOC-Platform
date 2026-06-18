@@ -11,6 +11,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 _INCIDENTS_PATH = Path(__file__).resolve().parent.parent / "data" / "sample_incidents.json"
+_ANALYSTS_PATH  = Path(__file__).resolve().parent.parent / "data" / "analysts.json"
 
 _SEVERITY_LEVELS = ["CRITICAL", "HIGH", "MEDIUM", "LOW"]
 _CASE_STATUSES   = ["OPEN", "INVESTIGATING", "CONTAINED", "RESOLVED", "CLOSED"]
@@ -120,6 +121,40 @@ def _load_incidents() -> list[dict]:
         return []
 
 
+def _load_analysts() -> list[dict]:
+    if not _ANALYSTS_PATH.exists():
+        return []
+    try:
+        return json.loads(_ANALYSTS_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+
+
+def filter_incidents(
+    incidents: list[dict],
+    date_from: datetime | None = None,
+    date_to:   datetime | None = None,
+    severities: list[str] | None = None,
+) -> list[dict]:
+    """Return incidents matching the supplied filters.  All filters are optional."""
+    result = []
+    for inc in incidents:
+        ts_raw = inc.get("created_at", "")
+        try:
+            ts = datetime.fromisoformat(ts_raw.replace("Z", "+00:00"))
+        except (ValueError, AttributeError):
+            ts = None
+
+        if date_from and ts and ts < date_from:
+            continue
+        if date_to and ts and ts > date_to:
+            continue
+        if severities and inc.get("severity") not in severities:
+            continue
+        result.append(inc)
+    return result
+
+
 # ---------------------------------------------------------------------------
 # Pure compute functions (no file I/O — easily unit-tested)
 # ---------------------------------------------------------------------------
@@ -217,6 +252,7 @@ def _compute_executive_kpis(
     critical_incs = sum(1 for i in incidents if i.get("severity") == "CRITICAL")
     active_camps  = len({i.get("campaign_id") for i in incidents if i.get("campaign_id")})
     return {
+        "total_incidents":         len(incidents),
         "open_cases":              open_cases,
         "critical_incidents":      critical_incs,
         "mttr_hours":              compute_mttr(cases),
@@ -348,3 +384,137 @@ def get_analyst_utilization_breakdown() -> dict[str, dict]:
     """Per-analyst open/resolved/critical counts from workbench_store."""
     from dashboard.workbench_store import get_workload_metrics
     return get_workload_metrics().get("by_analyst", {})
+
+
+# ---------------------------------------------------------------------------
+# MITRE ATT&CK coverage
+# ---------------------------------------------------------------------------
+
+_TACTIC_ORDER = [
+    "initial-access", "execution", "persistence", "privilege-escalation",
+    "defense-evasion", "credential-access", "discovery", "lateral-movement",
+    "collection", "exfiltration", "command-and-control", "impact",
+]
+
+_TACTIC_LABELS = {
+    "initial-access":       "Initial Access",
+    "execution":            "Execution",
+    "persistence":          "Persistence",
+    "privilege-escalation": "Privilege Escalation",
+    "defense-evasion":      "Defense Evasion",
+    "credential-access":    "Credential Access",
+    "discovery":            "Discovery",
+    "lateral-movement":     "Lateral Movement",
+    "collection":           "Collection",
+    "exfiltration":         "Exfiltration",
+    "command-and-control":  "Command & Control",
+    "impact":               "Impact",
+}
+
+
+def _compute_mitre_coverage(incidents: list[dict]) -> list[dict]:
+    """Return per-tactic technique coverage counts across all incidents."""
+    tactic_counts: dict[str, set[str]] = {t: set() for t in _TACTIC_ORDER}
+    for inc in incidents:
+        for tech in inc.get("attack_techniques", []):
+            tactic = tech.get("tactic", "")
+            tid    = tech.get("technique_id", "")
+            if tactic in tactic_counts and tid:
+                tactic_counts[tactic].add(tid)
+    return [
+        {
+            "tactic":     _TACTIC_LABELS.get(t, t),
+            "tactic_id":  t,
+            "techniques": len(ids),
+        }
+        for t, ids in tactic_counts.items()
+    ]
+
+
+def get_mitre_coverage() -> list[dict]:
+    return _compute_mitre_coverage(_load_incidents())
+
+
+# ---------------------------------------------------------------------------
+# Filterable public API wrappers
+# ---------------------------------------------------------------------------
+
+
+def get_executive_kpis_filtered(
+    date_from:  datetime | None = None,
+    date_to:    datetime | None = None,
+    severities: list[str] | None = None,
+) -> dict:
+    """Executive KPIs with optional date range + severity filters."""
+    from dashboard.case_store import get_all_cases
+    from dashboard.workbench_store import get_all_assignments
+    from dashboard.agent_store import load_runs
+
+    incidents = filter_incidents(_load_incidents(), date_from, date_to, severities)
+    return _compute_executive_kpis(
+        incidents   = incidents,
+        cases       = get_all_cases(),
+        assignments = get_all_assignments(),
+        runs        = load_runs(),
+    )
+
+
+def get_incident_trend_filtered(
+    days:       int = 30,
+    date_from:  datetime | None = None,
+    date_to:    datetime | None = None,
+    severities: list[str] | None = None,
+) -> list[dict]:
+    incidents = filter_incidents(_load_incidents(), date_from, date_to, severities)
+    return _compute_incident_trend(incidents, days)
+
+
+def get_severity_distribution_filtered(
+    date_from:  datetime | None = None,
+    date_to:    datetime | None = None,
+    severities: list[str] | None = None,
+) -> dict[str, int]:
+    incidents = filter_incidents(_load_incidents(), date_from, date_to, severities)
+    return _compute_severity_distribution(incidents)
+
+
+def get_campaign_activity_filtered(
+    top_n:      int = 10,
+    date_from:  datetime | None = None,
+    date_to:    datetime | None = None,
+    severities: list[str] | None = None,
+) -> list[dict]:
+    incidents = filter_incidents(_load_incidents(), date_from, date_to, severities)
+    return _compute_campaign_activity(incidents, top_n)
+
+
+def get_threat_actor_breakdown_filtered(
+    date_from:  datetime | None = None,
+    date_to:    datetime | None = None,
+    severities: list[str] | None = None,
+) -> dict[str, int]:
+    incidents = filter_incidents(_load_incidents(), date_from, date_to, severities)
+    return _compute_threat_actor_breakdown(incidents)
+
+
+def get_threat_category_breakdown_filtered(
+    date_from:  datetime | None = None,
+    date_to:    datetime | None = None,
+    severities: list[str] | None = None,
+) -> dict[str, int]:
+    incidents = filter_incidents(_load_incidents(), date_from, date_to, severities)
+    return _compute_threat_category_breakdown(incidents)
+
+
+def get_mitre_coverage_filtered(
+    date_from:  datetime | None = None,
+    date_to:    datetime | None = None,
+    severities: list[str] | None = None,
+) -> list[dict]:
+    incidents = filter_incidents(_load_incidents(), date_from, date_to, severities)
+    return _compute_mitre_coverage(incidents)
+
+
+def get_analysts() -> list[dict]:
+    """Return all analyst records from analysts.json."""
+    return _load_analysts()

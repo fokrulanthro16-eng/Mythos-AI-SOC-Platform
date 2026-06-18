@@ -1,0 +1,185 @@
+[
+  {
+    "analyst_id": "ANA-001",
+    "name": "Sarah Kim",
+    "email": "s.kim@soc.mythos",
+    "tier": "Tier 3",
+    "specializations": [
+      "Ransomware",
+      "Incident Response",
+      "Forensics"
+    ],
+    "certifications": [
+      "GCFE",
+      "GCIH",
+      "CISSP"
+    ],
+    "years_experience": 8,
+    "status": "active",
+    "active_cases": 3
+  },
+  {
+    "analyst_id": "ANA-002",
+    "name": "James Okafor",
+    "email": "j.okafor@soc.mythos",
+    "tier": "Tier 3",
+    "specializations": [
+      "Critical Infrastructure",
+      "OT/ICS Security",
+      "Incident Response"
+    ],
+    "certifications": [
+      "GICSP",
+      "GCIH",
+      "CISM"
+    ],
+    "years_experience": 10,
+    "status": "active",
+    "active_cases": 2
+  },
+  {
+    "analyst_id": "ANA-003",
+    "name": "Elena Vasquez",
+    "email": "e.vasquez@soc.mythos",
+    "tier": "Tier 2",
+    "specializations": [
+      "Identity & Access",
+      "Phishing",
+      "BEC"
+    ],
+    "certifications": [
+      "GCIA",
+      "Security+"
+    ],
+    "years_experience": 5,
+    "status": "active",
+    "active_cases": 4
+  },
+  {
+    "analyst_id": "ANA-004",
+    "name": "Priya Nair",
+    "email": "p.nair@soc.mythos",
+    "tier": "Tier 3",
+    "specializations": [
+      "APT Tracking",
+      "Threat Intelligence",
+      "Malware Analysis"
+    ],
+    "certifications": [
+      "GCTI",
+      "GREM",
+      "CISSP"
+    ],
+    "years_experience": 9,
+    "status": "active",
+    "active_cases": 4
+  },
+  {
+    "analyst_id": "ANA-005",
+    "name": "Nia Thompson",
+    "email": "n.thompson@soc.mythos",
+    "tier": "Tier 2",
+    "specializations": [
+      "Financial Threat Actors",
+      "Crypto Investigations"
+    ],
+    "certifications": [
+      "GCFE",
+      "CFE"
+    ],
+    "years_experience": 6,
+    "status": "active",
+    "active_cases": 3
+  },
+  {
+    "analyst_id": "ANA-006",
+    "name": "Carlos Mendez",
+    "email": "c.mendez@soc.mythos",
+    "tier": "Tier 3",
+    "specializations": [
+      "Data Exfiltration",
+      "Compliance",
+      "HIPAA/PCI-DSS"
+    ],
+    "certifications": [
+      "CISM",
+      "CRISC",
+      "CISSP"
+    ],
+    "years_experience": 11,
+    "status": "active",
+    "active_cases": 3
+  },
+  {
+    "analyst_id": "ANA-007",
+    "name": "Marcus Webb",
+    "email": "m.webb@soc.mythos",
+    "tier": "Tier 2",
+    "specializations": [
+      "C2 Detection",
+      "Network Forensics",
+      "Malware Delivery"
+    ],
+    "certifications": [
+      "GCFE",
+      "GNFA"
+    ],
+    "years_experience": 4,
+    "status": "active",
+    "active_cases": 5
+  },
+  {
+    "analyst_id": "ANA-008",
+    "name": "Aisha Patel",
+    "email": "a.patel@soc.mythos",
+    "tier": "Tier 2",
+    "specializations": [
+      "Endpoint Detection",
+      "Lateral Movement",
+      "Privilege Escalation"
+    ],
+    "certifications": [
+      "GCIA",
+      "CEH"
+    ],
+    "years_experience": 4,
+    "status": "active",
+    "active_cases": 4
+  },
+  {
+    "analyst_id": "ANA-009",
+    "name": "Tom Brandt",
+    "email": "t.brandt@soc.mythos",
+    "tier": "Tier 1",
+    "specializations": [
+      "Triage",
+      "Malware Delivery",
+      "Alert Monitoring"
+    ],
+    "certifications": [
+      "Security+",
+      "CySA+"
+    ],
+    "years_experience": 2,
+    "status": "active",
+    "active_cases": 5
+  },
+  {
+    "analyst_id": "ANA-010",
+    "name": "Ryan O'Brien",
+    "email": "r.obrien@soc.mythos",
+    "tier": "Tier 2",
+    "specializations": [
+      "Nation-State Threats",
+      "LOTL Techniques",
+      "Critical Infrastructure"
+    ],
+    "certifications": [
+      "GCIH",
+      "CEH"
+    ],
+    "years_experience": 6,
+    "status": "active",
+    "active_cases": 4
+  }
+]

