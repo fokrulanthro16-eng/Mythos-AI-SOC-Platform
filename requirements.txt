@@ -1,0 +1,30 @@
+pydantic>=2.7
+pydantic-settings>=2.6
+python-dotenv>=1.0
+pytest>=8.0
+streamlit>=1.35
+plotly>=5.22
+pandas>=2.2
+
+# Phase 5 — API & database
+fastapi>=0.115
+uvicorn[standard]>=0.34
+sqlalchemy[asyncio]>=2.0
+asyncpg>=0.29
+alembic>=1.14
+aiosqlite>=0.20
+
+# Phase 5 — auth & security
+passlib[bcrypt]>=1.7
+PyJWT>=2.9
+python-multipart>=0.0.20
+
+# Phase 5 — cache & messaging
+redis>=5.0
+
+# Phase 5 — observability
+prometheus-client>=0.21
+
+# Phase 5 — testing
+httpx>=0.28
+pytest-asyncio>=0.24

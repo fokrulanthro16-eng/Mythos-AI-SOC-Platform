@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+*.coveragerc
+
+# Environment / secrets
+.env
+*.env.local
+*.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs — all runtime data excluded; directory preserved via .gitkeep
+logs/*.jsonl
+logs/*.csv
+logs/*.json
+
+# Generated PDFs
+reports/*.pdf
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+mythos_local.db
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Docker volumes / local overrides
+docker-compose.override.yml

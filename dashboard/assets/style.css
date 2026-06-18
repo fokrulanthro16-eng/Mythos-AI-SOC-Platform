@@ -1,0 +1,58 @@
+/* Mythos Command Center — dark theme overrides */
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #0D0F1A;
+    border-right: 1px solid #1E2235;
+}
+
+/* Metric cards */
+[data-testid="stMetric"] {
+    background-color: #1A1D27;
+    border: 1px solid #2C3050;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+}
+
+[data-testid="stMetricValue"] {
+    font-size: 2rem !important;
+    font-weight: 700;
+    color: #E8EAF0;
+}
+
+[data-testid="stMetricLabel"] {
+    font-size: 0.78rem;
+    color: #8B90A8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* Section headers */
+h1 { color: #FF4B4B; }
+h2 { color: #E8EAF0; border-bottom: 1px solid #2C3050; padding-bottom: 0.4rem; }
+h3 { color: #A0A4BA; }
+
+/* Download buttons */
+[data-testid="stDownloadButton"] > button {
+    background-color: #1E2235;
+    border: 1px solid #3A3F5C;
+    color: #E8EAF0;
+    border-radius: 6px;
+    font-size: 0.82rem;
+}
+[data-testid="stDownloadButton"] > button:hover {
+    background-color: #FF4B4B;
+    border-color: #FF4B4B;
+}
+
+/* Dataframe tables */
+[data-testid="stDataFrame"] { border: 1px solid #2C3050; border-radius: 6px; }
+
+/* Severity color badges */
+.badge-critical { color: #FF4B4B; font-weight: bold; }
+.badge-high     { color: #FF8C00; font-weight: bold; }
+.badge-medium   { color: #FFD700; font-weight: bold; }
+.badge-low      { color: #00CC44; font-weight: bold; }
+
+/* Dividers */
+hr { border-color: #2C3050; }
