@@ -1,0 +1,281 @@
+[
+  {
+    "name": "APT29",
+    "aliases": ["Cozy Bear", "The Dukes", "Midnight Blizzard", "NOBELIUM", "Iron Hemlock", "Grizzly Steppe"],
+    "country": "Russia",
+    "type": "Nation-State",
+    "motivation": ["Espionage", "Intelligence Collection"],
+    "sophistication": "nation-state",
+    "active_since": "2008",
+    "description": "APT29 (Cozy Bear/Midnight Blizzard) is a highly sophisticated Russian state-sponsored threat actor attributed to the SVR (Foreign Intelligence Service). Known for stealthy, long-term intrusions targeting government, diplomatic, defence, and think-tank organisations. Responsible for the SolarWinds Orion supply chain compromise and Microsoft corporate network breach in 2024. Uses bespoke malware families and legitimate cloud services for C2 to evade detection.",
+    "target_sectors": ["Government", "Defense", "Think Tanks", "Technology", "Energy", "Healthcare"],
+    "target_regions": ["United States", "Europe", "NATO Members", "Ukraine"],
+    "known_campaigns": [
+      "Operation SolarWinds",
+      "Operation MFA Bypass 2023",
+      "Operation OAuth Phishing 2024",
+      "Midnight Blizzard M365 Campaign 2026"
+    ],
+    "mitre_techniques": [
+      "T1566.002", "T1528", "T1539", "T1098.001", "T1087",
+      "T1190", "T1071.001", "T1027", "T1036", "T1074",
+      "T1041", "T1195.001", "T1550", "T1078"
+    ],
+    "known_tools": ["SUNBURST", "TEARDROP", "MagicWeb", "GraphicalProton", "WellMess", "Cobalt Strike", "Brute Ratel C4"],
+    "known_ioc_patterns": ["device-login.microsoft-verify", "45.155.205", "104.21.82", "midnight-blizzard"],
+    "severity": "CRITICAL",
+    "attribution_confidence": 0.95,
+    "last_observed": "2026-06-10"
+  },
+  {
+    "name": "APT28",
+    "aliases": ["Fancy Bear", "Sofacy", "Pawn Storm", "Sednit", "IRON TWILIGHT", "Forest Blizzard", "Strontium"],
+    "country": "Russia",
+    "type": "Nation-State",
+    "motivation": ["Espionage", "Influence Operations", "Disinformation"],
+    "sophistication": "nation-state",
+    "active_since": "2004",
+    "description": "APT28 (Fancy Bear) is a Russian GRU Unit 26165 threat actor with extensive history of targeting NATO governments, defence contractors, political parties, and critical infrastructure. Known for the DNC hack (2016), WADA anti-doping agency breach, and numerous spear-phishing campaigns using Brute Ratel C4 and X-Agent implants. Highly active in ongoing Ukraine-related cyber operations.",
+    "target_sectors": ["Government", "Defense", "Political Organisations", "Critical Infrastructure", "Media"],
+    "target_regions": ["United States", "Europe", "NATO Members", "Ukraine", "Central Asia"],
+    "known_campaigns": [
+      "Operation Pawn Storm",
+      "DNC/DCCC Intrusion 2016",
+      "WADA Anti-Doping Breach",
+      "Operation Fancy Bear 2026",
+      "NATO Contractor Campaign 2026"
+    ],
+    "mitre_techniques": [
+      "T1566.001", "T1068", "T1055", "T1082", "T1071.001",
+      "T1027", "T1036", "T1074", "T1041", "T1203",
+      "T1003.001", "T1550", "T1021.002"
+    ],
+    "known_tools": ["Brute Ratel C4", "X-Agent", "X-Tunnel", "Komplex", "Zebrocy", "Fancy Bear Implant", "LoJax"],
+    "known_ioc_patterns": ["185.220.101", "apt28-c2", "windowsupdate-patch.microsoft-cdn"],
+    "severity": "CRITICAL",
+    "attribution_confidence": 0.93,
+    "last_observed": "2026-06-08"
+  },
+  {
+    "name": "Lazarus",
+    "aliases": ["HIDDEN COBRA", "Guardians of Peace", "ZINC", "Diamond Sleet", "Labyrinth Chollima", "TraderTraitor"],
+    "country": "North Korea",
+    "type": "Nation-State",
+    "motivation": ["Financial", "Cryptocurrency Theft", "Espionage"],
+    "sophistication": "nation-state",
+    "active_since": "2009",
+    "description": "Lazarus Group (HIDDEN COBRA) is a prolific North Korean state-sponsored threat actor believed to operate under the Reconnaissance General Bureau. Responsible for the 2014 Sony Pictures hack, 2016 Bangladesh Bank heist ($81M theft), 2017 WannaCry ransomware, and ongoing cryptocurrency theft operations totalling over $3 billion. The TraderTraitor sub-cluster targets cryptocurrency exchanges and DeFi platforms through supply chain attacks on developer environments.",
+    "target_sectors": ["Financial Services", "Cryptocurrency", "Defence", "Media", "Energy"],
+    "target_regions": ["United States", "South Korea", "Japan", "Europe", "Global"],
+    "known_campaigns": [
+      "Operation Sony 2014",
+      "Bangladesh Bank Heist 2016",
+      "WannaCry 2017",
+      "AppleJeus Crypto Campaign",
+      "TraderTraitor npm Supply Chain 2026",
+      "Crypto Exchange Drain 2026"
+    ],
+    "mitre_techniques": [
+      "T1195.002", "T1059.001", "T1071.001", "T1041", "T1074",
+      "T1105", "T1486", "T1027", "T1082", "T1087",
+      "T1547.001", "T1036", "T1552"
+    ],
+    "known_tools": ["AppleJeus", "COPPERHEDGE", "ELECTRICFISH", "HOPLIGHT", "NukeSped", "Loader", "Cobalt Strike"],
+    "known_ioc_patterns": ["210.52.109", "npm-stats-cdn.lazarus-relay", "trading-platform-update.defi-cdn"],
+    "severity": "CRITICAL",
+    "attribution_confidence": 0.91,
+    "last_observed": "2026-06-15"
+  },
+  {
+    "name": "Volt Typhoon",
+    "aliases": ["BRONZE SILHOUETTE", "Vanguard Panda", "Dev-0391", "UNC3236"],
+    "country": "China",
+    "type": "Nation-State",
+    "motivation": ["Pre-Positioning", "Critical Infrastructure Disruption", "Espionage"],
+    "sophistication": "nation-state",
+    "active_since": "2021",
+    "description": "Volt Typhoon is a PRC state-sponsored threat actor with a distinctive focus on LOTL (living-off-the-land) techniques to pre-position within US and allied critical infrastructure — particularly utilities, communications, and transportation sectors. Unlike most APTs, Volt Typhoon avoids deploying malware in favour of native OS tools (netsh, wmic, certutil). CISA, NSA, and FBI issued a joint advisory in 2024 warning of Volt Typhoon's deep persistence in CNI networks, potentially enabling disruption during geopolitical conflict.",
+    "target_sectors": ["Utilities", "Communications", "Transportation", "Government", "Defense"],
+    "target_regions": ["United States", "Guam", "Allied Nations"],
+    "known_campaigns": [
+      "Operation KV-Botnet 2024",
+      "CNI Pre-Positioning Campaign 2024-2026",
+      "Government LOTL Campaign 2026"
+    ],
+    "mitre_techniques": [
+      "T1078", "T1047", "T1572", "T1018", "T1082",
+      "T1057", "T1046", "T1059.001", "T1041", "T1074",
+      "T1548"
+    ],
+    "known_tools": ["KV-Botnet", "netsh.exe (native)", "wmic.exe (native)", "certutil.exe (native)", "FRP (Fast Reverse Proxy)"],
+    "known_ioc_patterns": ["210.52.109.88", "volt-typhoon", "netsh tunnel", "wmic lateral"],
+    "severity": "CRITICAL",
+    "attribution_confidence": 0.88,
+    "last_observed": "2026-06-12"
+  },
+  {
+    "name": "FIN7",
+    "aliases": ["Carbon Spider", "GOLD NIAGARA", "Sangria Tempest", "Anunak", "Carbanak Group"],
+    "country": "Russia",
+    "type": "Criminal",
+    "motivation": ["Financial", "Payment Card Theft", "BEC"],
+    "sophistication": "advanced",
+    "active_since": "2013",
+    "description": "FIN7 (Carbon Spider) is a prolific Russia-based cybercriminal group with over a decade of operations targeting the retail, hospitality, and financial sectors. Known for the Carbanak banking malware framework, FIN7 has stolen an estimated $1.2 billion globally. They evolved from point-of-sale malware to sophisticated BEC campaigns, ransomware deployment (partnering with REvil and BlackMatter), and supply chain attacks. Several core members were indicted by the DOJ in 2018 but operations continue.",
+    "target_sectors": ["Retail", "Hospitality", "Finance", "Healthcare", "Technology"],
+    "target_regions": ["United States", "Europe", "Australia", "Canada"],
+    "known_campaigns": [
+      "Operation Carbanak 2014-2018",
+      "GRIFFON Campaign 2019-2021",
+      "DarkGate Distribution 2023-2026",
+      "Banking Phishing Wave 2026"
+    ],
+    "mitre_techniques": [
+      "T1566.001", "T1566.002", "T1059.001", "T1059.005", "T1071.001",
+      "T1055", "T1056.001", "T1078", "T1486", "T1041",
+      "T1547.001", "T1003.001", "T1219"
+    ],
+    "known_tools": ["Carbanak", "GRIFFON", "BIRDWATCH", "Loadout", "BABYMETAL", "Cobalt Strike", "SQLRat", "PowerShell Empire"],
+    "known_ioc_patterns": ["darkgate-staging.cdn-fast", "secure-wire-confirm.bank-alert", "91.234.99.200"],
+    "severity": "CRITICAL",
+    "attribution_confidence": 0.89,
+    "last_observed": "2026-06-14"
+  },
+  {
+    "name": "TA505",
+    "aliases": ["Hive0065", "Shrink Locker Group", "GOLD EVERGREEN", "Cl0p Operators"],
+    "country": "Russia",
+    "type": "Criminal",
+    "motivation": ["Financial", "Ransomware", "Data Extortion"],
+    "sophistication": "advanced",
+    "active_since": "2014",
+    "description": "TA505 (Hive0065) is a prolific financially motivated threat actor and one of the most active ransomware operators globally. Operators of the Cl0p ransomware and responsible for massive exploitation of zero-day vulnerabilities in managed file transfer (MFT) platforms including Accellion FTA, GoAnywhere, and MOVEit Transfer. Their exploitation-to-exfiltration timeline is typically under 24 hours. TA505 has victimised over 2,500 organisations worldwide.",
+    "target_sectors": ["Healthcare", "Finance", "Legal", "Energy", "Technology"],
+    "target_regions": ["United States", "Europe", "Global"],
+    "known_campaigns": [
+      "Accellion FTA Exploitation 2021",
+      "GoAnywhere Zero-Day 2023",
+      "MOVEit Transfer Zero-Day 2023",
+      "Cl0p MFT Campaign 2026"
+    ],
+    "mitre_techniques": [
+      "T1190", "T1041", "T1074", "T1560", "T1567",
+      "T1078", "T1059.001", "T1486", "T1027", "T1082"
+    ],
+    "known_tools": ["Cl0p", "TrueBot", "FlawedAmmyy", "SDBbot", "MegaSync (exfil)", "Cobalt Strike"],
+    "known_ioc_patterns": ["clop-leaks.tor2web", "mega.nz/folder", "185.220.101.77"],
+    "severity": "CRITICAL",
+    "attribution_confidence": 0.92,
+    "last_observed": "2026-06-16"
+  },
+  {
+    "name": "LockBit",
+    "aliases": ["LockBit 4.0", "LockBit Black 2.0", "ABCD Ransomware", "LockBit RaaS"],
+    "country": "Russia",
+    "type": "Criminal",
+    "motivation": ["Financial", "Ransomware-as-a-Service"],
+    "sophistication": "advanced",
+    "active_since": "2019",
+    "description": "LockBit is the world's most prolific ransomware-as-a-service operation, claiming responsibility for over 2,000 victims globally. After Operation Cronos disrupted LockBit 3.0 infrastructure in February 2024, the group re-emerged with LockBit 4.0 featuring ESXi-aware encryption, VM hibernation bypass, and mandatory data exfiltration before encryption. LockBit 4.0 affiliates are linked to a disproportionate share of healthcare and critical infrastructure attacks in 2026.",
+    "target_sectors": ["Healthcare", "Manufacturing", "Logistics", "Finance", "Government"],
+    "target_regions": ["United States", "Europe", "Australia", "Global"],
+    "known_campaigns": [
+      "LockBit 3.0 Global Campaign 2022-2024",
+      "Operation Cronos Disruption 2024",
+      "LockBit 4.0 Resurrection 2026",
+      "Hospital Network Campaign 2026"
+    ],
+    "mitre_techniques": [
+      "T1486", "T1490", "T1078", "T1133", "T1059.001",
+      "T1055", "T1562.001", "T1003.001", "T1550", "T1021.001"
+    ],
+    "known_tools": ["LockBit 4.0", "Cobalt Strike", "Mimikatz", "AnyDesk", "Rclone", "PsExec", "StealBit"],
+    "known_ioc_patterns": ["cdn-update-check.systems", "api-update-secure.net", "91.234.99", "LockBit4_Global"],
+    "severity": "CRITICAL",
+    "attribution_confidence": 0.94,
+    "last_observed": "2026-06-17"
+  },
+  {
+    "name": "BlackCat",
+    "aliases": ["ALPHV", "BlackCat Ransomware", "Noberus", "UNC4466"],
+    "country": "Russia",
+    "type": "Criminal",
+    "motivation": ["Financial", "Ransomware", "Triple Extortion"],
+    "sophistication": "advanced",
+    "active_since": "2021",
+    "description": "BlackCat (ALPHV) operates the most technically sophisticated ransomware family, written in Rust for cross-platform targeting of Windows, Linux, and VMware ESXi. The group pioneered triple extortion (encryption + data leak + DDoS threat) and was among the first to target CI/CD pipelines. Despite an FBI-led disruption and seizure of infrastructure in December 2023, BlackCat/ALPHV affiliates reconstituted with hardened operations in 2025-2026 targeting energy and critical manufacturing.",
+    "target_sectors": ["Energy", "Manufacturing", "Critical Infrastructure", "Healthcare"],
+    "target_regions": ["United States", "Germany", "United Kingdom", "Global"],
+    "known_campaigns": [
+      "MGM Resorts Attack 2023",
+      "Change Healthcare Disruption 2024",
+      "ALPHV Resurge 2025-2026",
+      "Energy Sector Campaign 2026"
+    ],
+    "mitre_techniques": [
+      "T1486", "T1041", "T1078.002", "T1059.003", "T1027",
+      "T1562.001", "T1490", "T1074", "T1560", "T1567"
+    ],
+    "known_tools": ["BlackCat/ALPHV", "Cobalt Strike", "ExMatter", "Brute Ratel C4", "Coreid", "Esfinge"],
+    "known_ioc_patterns": ["alphv-exfil-node.icu", "secure-cdn-endpoint.io", "45.141.87", "77.105.163"],
+    "severity": "CRITICAL",
+    "attribution_confidence": 0.87,
+    "last_observed": "2026-06-12"
+  },
+  {
+    "name": "Scattered Spider",
+    "aliases": ["UNC3944", "Muddled Libra", "Scatter Swine", "Star Fraud", "0ktapus", "Roasted 0ktapus"],
+    "country": "United States / United Kingdom",
+    "type": "Criminal",
+    "motivation": ["Financial", "Data Theft", "Ransomware (Partnership)"],
+    "sophistication": "advanced",
+    "active_since": "2022",
+    "description": "Scattered Spider (UNC3944) is a loosely affiliated criminal collective believed to be composed primarily of English-speaking members in their teens and twenties. Despite limited technical background, the group demonstrates exceptional social engineering capabilities — bypassing MFA via fatigue attacks, SMS phishing, and service desk social engineering. They leverage legitimate remote administration tools and partner with established ransomware groups (ALPHV/BlackCat, RansomHub) to maximise impact. Responsible for major breaches at MGM Resorts ($100M+ loss), Caesars Entertainment, and numerous SaaS platforms.",
+    "target_sectors": ["Hospitality", "Gaming", "Technology", "Financial Services", "Telecommunications"],
+    "target_regions": ["United States", "United Kingdom", "Canada"],
+    "known_campaigns": [
+      "0ktapus Twilio Campaign 2022",
+      "MGM Resorts Attack 2023",
+      "Caesars Entertainment Breach 2023",
+      "Okta Identity Campaign 2024",
+      "Scattered Spider SaaS Campaign 2026"
+    ],
+    "mitre_techniques": [
+      "T1566.002", "T1110.003", "T1528", "T1539", "T1098.001",
+      "T1074", "T1567", "T1041", "T1087", "T1219"
+    ],
+    "known_tools": ["Okta impersonation", "MFA fatigue", "SIMSWAP", "AnyDesk", "ScreenConnect", "Sliver C2", "Mythic C2"],
+    "known_ioc_patterns": ["okta-verify-login.xyz", "m365-verify-evilginx", "okta-mfa-verify.com"],
+    "severity": "HIGH",
+    "attribution_confidence": 0.85,
+    "last_observed": "2026-06-11"
+  },
+  {
+    "name": "Mustang Panda",
+    "aliases": ["TA416", "Earth Preta", "RedDelta", "BASIN", "Bronze President", "Stately Taurus"],
+    "country": "China",
+    "type": "Nation-State",
+    "motivation": ["Espionage", "Political Intelligence"],
+    "sophistication": "advanced",
+    "active_since": "2012",
+    "description": "Mustang Panda (Earth Preta/TA416) is a prolific Chinese APT with a long history of targeting government entities, NGOs, religious organisations, and think tanks in Southeast Asia, Europe, and the United States. The group is particularly active against targets related to Uyghur affairs, Taiwan, and South China Sea geopolitics. Known for PlugX malware and creative phishing using geopolitical lure documents, Mustang Panda typically achieves persistent access through spear-phishing and USB-based propagation.",
+    "target_sectors": ["Government", "NGOs", "Religious Organisations", "Think Tanks", "Telecommunications"],
+    "target_regions": ["Southeast Asia", "Europe", "Mongolia", "Taiwan", "United States"],
+    "known_campaigns": [
+      "Operation Earth Preta 2022",
+      "Southeast Asia Embassy Campaign 2023",
+      "European Government Espionage 2024",
+      "Asia Pacific Intelligence Collection 2026"
+    ],
+    "mitre_techniques": [
+      "T1566.001", "T1566.002", "T1027", "T1036", "T1082",
+      "T1071.001", "T1052.001", "T1547.001", "T1105", "T1074",
+      "T1041", "T1087"
+    ],
+    "known_tools": ["PlugX", "Cobalt Strike", "China Chopper", "TONEINS", "TONESHELL", "PUBLOAD"],
+    "known_ioc_patterns": ["earth-preta", "plugx-relay", "redDelta-cdn"],
+    "severity": "HIGH",
+    "attribution_confidence": 0.86,
+    "last_observed": "2026-05-28"
+  }
+]

@@ -43,6 +43,14 @@ logs/*.json
 # Generated PDFs
 reports/*.pdf
 
+# Uploads — runtime files excluded; directory preserved via .gitkeep
+uploads/*
+!uploads/.gitkeep
+
+# Exports — generated PDFs excluded; directory preserved via .gitkeep
+exports/*
+!exports/.gitkeep
+
 # Database files
 *.db
 *.sqlite

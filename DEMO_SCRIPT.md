@@ -1,235 +1,197 @@
-# Mythos — 3-Minute Demo Script
+# Mythos — Live Demo Script
 
-**Target audience:** Security engineers, SOC leads, engineering hiring managers  
-**Format:** Screen recording with voiceover  
-**Total runtime:** 3:00  
-**Prerequisite:** Dashboard running at http://localhost:8501, orchestrator has been run
+**Platform:** Mythos AI-Powered SOC Incident Orchestration Platform  
+**Runtime:** ~12 minutes (full) · ~6 minutes (condensed)  
+**URL:** http://localhost:8501 · API: http://localhost:8000
 
 ---
 
-## Pre-recording Setup
+## Pre-Demo Checklist
 
+- [ ] Pipeline has run: `python core/orchestrator.py` (generates `logs/attribution_log.jsonl`)
+- [ ] Dashboard running: `python -m streamlit run dashboard/app.py`
+- [ ] Browser open at **http://localhost:8501**
+- [ ] Terminal visible for CLI sections
+- [ ] PDF viewer ready (to show generated reports)
+
+---
+
+## Opening Statement (30 sec)
+
+> "Mythos is a full-stack AI Security Operations Centre platform. It replaces manual incident triage with a 5-agent AI pipeline that takes any alert from detection to mitigation in under 30 seconds — with automatic MITRE ATT&CK enrichment, threat actor attribution, case management, and one-click PDF reporting. Let me show you the complete workflow."
+
+---
+
+## Act 1 — The Agent Pipeline (2 min)
+
+**Terminal:**
 ```bash
-# Terminal 1 — ensure fresh data
 python core/orchestrator.py
-
-# Terminal 2 — start dashboard
-python -m streamlit run dashboard/app.py
-
-# Browser — open in full screen, dark mode, 1920×1080
-# Close all other browser tabs
-# Set browser zoom to 100%
 ```
 
-Pre-position: browser on **http://localhost:8501** showing the home page.
+**Talk track:**
+- "50 real-world 2026 incidents are processing through 5 specialised AI agents — each agent owns one responsibility."
+- "Watch the confidence score rise from 0.75 to 0.91 as each agent enriches the data."
+- "PlannerAgent assigns IOCs and risk score. IntelligenceAgent enriches with MITRE ATT&CK. AttributionAgent maps to threat actor and campaign. ForensicsAgent adds full technique detail. ComplianceAgent selects the remediation playbook."
+- "Every incident is logged to JSONL and CSV — that feeds the live dashboard."
+
+**Point to in output:**
+- `PlannerAgent: DETECTED → ANALYZED, risk_score=0.91`
+- `AttributionAgent: actor=LOCKBIT, campaign=CAMP-LOCKBIT4-2026`
+- `ForensicsAgent: enriched 4 ATT&CK techniques`
+- `ComplianceAgent: ATTRIBUTED → MITIGATED`
 
 ---
 
-## Scene 1 — Hook & Overview (0:00–0:18)
+## Act 2 — Incident Overview (2 min)
 
-**[Screen: Dashboard home page]**
+**Navigate to:** Page 1 — Incident Overview
 
-> "This is Mythos — a full-stack AI-powered SOC platform I built from scratch.
-> It orchestrates the complete incident response lifecycle through a five-stage
-> agent pipeline, exposes a live eleven-page command center, and generates
-> professional PDF reports. Everything you're about to see is real data from
-> a realistic 2026 enterprise threat dataset."
+**Talk track:**
+- "This is the SOC analyst landing page. Five KPIs at the top — 50 incidents, 11 critical, average risk 0.79."
+- "The severity donut: 26 HIGH, 11 CRITICAL. The confidence scatter lets analysts find under-investigated incidents — high risk, low confidence in the top-left quadrant."
 
-**[Action]** Slowly scroll the home page to show the navigation sidebar with all 11 pages listed.
+**Live actions:**
+1. Point to the KPI row — total, critical, open cases, avg risk, avg confidence
+2. Sidebar: filter severity to **CRITICAL only** → table drops to 11 incidents
+3. Click row `INC-2026-001` (LOCKBIT4-RANSOMWARE) to expand detail
+4. Point to: severity badge, MITRE techniques listed, confidence 0.91, actor attribution
+5. Click **Generate PDF Report** → 9-section PDF downloads
+6. Open the PDF — show cover page, MITRE mapping table, IOC evidence table, recommendations
 
----
-
-## Scene 2 — Executive Dashboard (0:18–0:40)
-
-**[Action]** Click **"10 Executive Dashboard"** in the sidebar.
-
-> "Starting at the top — the Executive Dashboard gives a C-suite view of the
-> SOC's current posture."
-
-**[Action]** Point to the 8 KPI cards across the top row.
-
-> "Eight live KPIs: open cases, critical incidents, mean time to respond at
-> seventy-five hours, mean time to detect, active campaigns, analyst
-> utilisation, and attribution confidence."
-
-**[Action]** Scroll down to the incident trend area chart.
-
-> "The thirty-day incident trend shows our 2026 dataset spread across the
-> month — staggered timestamps so MTTR and MTTD calculations are meaningful."
-
-**[Action]** Point briefly at the severity donut and threat category bar.
-
-> "Severity distribution and threat category breakdown — ransomware leads at
-> thirty-two percent."
+**Key line:**
+> "A professional incident report with MITRE ATT&CK mapping, IOC table, actor profile, and remediation steps — generated automatically. No analyst writes this."
 
 ---
 
-## Scene 3 — Incident Overview + PDF Export (0:40–1:05)
+## Act 3 — Analyst Workbench (2.5 min)
 
-**[Action]** Click **"1 Incident Overview"** in the sidebar.
+**Navigate to:** Page 8 — Analyst Workbench
 
-> "The Incident Overview is the analyst's primary triage view."
+**Talk track:**
+- "This is day-to-day analyst workflow. Let me work the LockBit incident from triage to closure."
 
-**[Action]** Point to the KPI row, then the four charts.
+**Live actions:**
+1. Assign dropdown: select `INC-2026-001`
+2. Analyst: **Sarah Kim** (Tier 3 · Ransomware specialist)
+3. Priority: **P1** · Severity: **CRITICAL** → click **Assign**
+4. Open the **6-tab action panel** — read tab names aloud
+5. Tab 1 — **Change Status**: move to INVESTIGATING
+6. Tab 3 — **Add Note**: type `"Confirmed LockBit 4.0 IOCs on HOSTNAME-042. Isolating network segment. Backup verification in progress."`
+7. Tab 2 — **Escalate**: P1 reason: `"Active encryption detected on 3 endpoints"`
+8. Tab 6 — **Report**: click Generate → PDF downloads
+9. Scroll to **Analyst Activity Feed** — show all actions logged chronologically
+10. Show **Workload Distribution Chart** — Sarah Kim's queue highlighted
 
-> "Severity pie, risk score histogram, status progression over time, and a
-> confidence scatter by severity. All fifty incidents from the 2026 dataset."
-
-**[Action]** Scroll to the Incident Table and hover over a CRITICAL row.
-
-> "Every row in the incident table is a live data point from the agent pipeline."
-
-**[Action]** Scroll to the PDF Report Generator expander at the bottom. Expand it.
-
-> "New in Phase Seven-Two: one-click PDF incident reports. Select any incident—"
-
-**[Action]** Select "INC-2026-001" from the dropdown. Click **"Generate PDF"**.
-
-> "—and Mythos generates a professional eight-section report covering the
-> incident summary, MITRE ATT&CK mapping, threat actor attribution, analyst
-> notes, case status, evidence, and tailored recommendations."
-
-**[Action]** The Download button appears. Point to it without clicking.
-
-> "Download button is ready. The report uses ReportLab platypus and degrades
-> gracefully on any data — an empty incident still produces a valid PDF."
+**Key line:**
+> "Full triage workflow — assign, update, escalate, note, report — in 60 seconds. No context-switching to a separate ticketing system."
 
 ---
 
-## Scene 4 — Agent Pipeline & ATT&CK (1:05–1:28)
+## Act 4 — MITRE ATT&CK (1.5 min)
 
-**[Action]** Click **"7 MITRE ATT&CK"** in the sidebar.
+**Navigate to:** Page 7 — MITRE ATT&CK Browser
 
-> "The MITRE ATT&CK page uses a lazy-loading singleton over the full ATT&CK
-> dataset. Analysts can browse by tactic, search by technique ID—"
+**Live actions:**
+1. Select tactic: **Impact**
+2. Search technique ID: `T1486`
+3. Show full detail panel: description, sub-techniques, mitigations, ATT&CK URL
+4. Navigate to **Executive Dashboard** (page 10a) → MITRE ATT&CK coverage bar chart
+5. Point to: 12 tactics covered, showing technique count per tactic
 
-**[Action]** Type "T1486" into the search box if one exists, or navigate to a tactic.
-
-> "—and see full technique descriptions linked back to the official ATT&CK site."
-
-**[Action]** Click **"9 Agent Collaboration"** in the sidebar.
-
-> "The Agent Collaboration page shows the multi-agent pipeline in action.
-> Five specialised agents — Planner, Intelligence, Attribution, Forensics,
-> and Compliance — each handle one stage of the DETECTED-to-MITIGATED
-> state machine. Every transition is persisted to JSONL before the next
-> agent runs."
-
-**[Action]** Show one agent run record if visible, or point to the timeline area.
+**Key line:**
+> "47 unique ATT&CK technique IDs across our 50 incidents. The ForensicsAgent enriches every technique automatically — analysts don't look anything up."
 
 ---
 
-## Scene 5 — Case Management (1:28–1:50)
+## Act 5 — Threat Actor Intelligence (2 min)
 
-**[Action]** Click **"6 Case Management"** in the sidebar.
+**Navigate to:** Page 11 — Threat Actor Intelligence Center
 
-> "Case management gives the SOC full lifecycle control over incidents."
+**Talk track:**
+- "We track 23 threat actors across 5 intelligence tabs. Let me zoom into LockBit."
 
-**[Action]** Point to the stats row at the top (Total, Open, Investigating, Contained, Resolved, Closed).
+**Live actions:**
+1. Sidebar search: type `LockBit`
+2. **Tab 1 — Actor Profiles**: show risk gauge 94%, confidence gauge 94%
+3. Expand **ATT&CK Techniques** → T1486, T1490, T1078, T1059.001
+4. Expand **Campaign History** → LockBit 3.0 Global, Hospital Network 2026
+5. **Tab 2 — Campaign Activity**: show Gantt timeline
+6. **Tab 4 — Actor Comparison**: select LockBit + APT29 + TA505 → radar renders
+7. Point to radar axes: Risk · Attribution · TTP Coverage · Campaign Activity · Victim Reach
 
-> "Six status counters at a glance. The status flow is Open → Investigating →
-> Contained → Resolved → Closed."
-
-**[Action]** Scroll to the case detail panel. Select the first case in the dropdown.
-
-> "Each case has a live update panel — change status, escalate priority, add
-> timestamped notes, reassign to a different analyst."
-
-**[Action]** Scroll to show the Notes section and the Timeline side-by-side.
-
-> "Notes and the full case timeline in a two-column layout. The Generate PDF
-> button at the bottom produces the same eight-section report scoped to this
-> specific case."
+**Key line:**
+> "This is decision-support, not a data table. Which actor has the widest TTP breadth? Which is currently active? Which should we brief the board on? One glance."
 
 ---
 
-## Scene 6 — Analyst Workbench (1:50–2:12)
+## Act 6 — Executive Dashboard and Reports (1.5 min)
 
-**[Action]** Click **"8 Analyst Workbench"** in the sidebar.
+**Navigate to:** Page 10a — Executive Dashboard
 
-> "The Analyst Workbench is where individual analysts live. Assign incidents
-> to any of ten named analysts, set severity and priority."
+**Live actions:**
+1. Set quick range: **90d**
+2. Read KPI cards: `Total 50 · Critical 11 · MTTD 7.4h · MTTR 72h · Attribution 75%`
+3. Severity filter: remove LOW and MEDIUM → KPIs update live
+4. Click **Export KPI Summary (CSV)**
 
-**[Action]** Scroll to the Case Actions panel. Click the "Escalate Priority" tab.
+**Navigate to:** Page 10b — Executive Reports
 
-> "The six-tab action panel covers every workflow: status change, escalation
-> with a reason field, notes, reassignment, close with resolution summary,
-> and the new Report tab for PDF export."
+**Live actions:**
+1. Date: Last 90 days · Severity: CRITICAL + HIGH
+2. Review charts: severity donut, category bar, attribution chart, MITRE coverage bar
+3. Click **Generate Executive PDF**
+4. Open the PDF — show: cover page with classification banner, 8 KPI cards, MITRE tactic coverage table, actor attribution table
 
-**[Action]** Click the "📄 Report" tab.
-
-> "One click generates a PDF with the incident's current state — including
-> the linked case record and all workbench notes."
-
-**[Action]** Scroll down to the Analyst Workload Distribution chart.
-
-> "And a live grouped bar chart showing open versus resolved cases per analyst.
-> This is the data feeding the analyst utilisation KPI in the Executive Dashboard."
+**Key line:**
+> "A board-ready executive intelligence report in one click. This is what a CISO sends to the executive committee — generated directly from live SOC data."
 
 ---
 
-## Scene 7 — Threat Actor Intelligence Center (2:12–2:40)
+## Act 7 — Test Suite (30 sec)
 
-**[Action]** Click **"11 Threat Actors"** in the sidebar.
+**Terminal:**
+```bash
+pytest tests/ -q --tb=no
+```
 
-> "Phase Seven-Three added the Threat Actor Intelligence Center — twenty-three
-> tracked actors, six featured in the header."
+**Expected output:**
+```
+874 passed in 84.58s
+```
 
-**[Action]** Point to the six KPI cards (LOCKBIT4, TA505, FIN7, APT29, APT41, Lazarus).
-
-> "Each card shows origin flag, severity badge, risk score, and active campaign count."
-
-**[Action]** The Actor Profiles tab should be active. Click on APT41 in the dropdown.
-
-> "Actor profiles include a ReportLab-style risk gauge, attribution confidence,
-> target sector breakdown from live campaign data, and expandable sections for
-> TTPs, tools, IOC patterns, and campaign history."
-
-**[Action]** Click the **"⚖️ Actor Comparison"** tab.
-
-> "The comparison tab lets you radar-chart up to four actors simultaneously —
-> normalized across risk score, attribution confidence, TTP coverage, campaign
-> activity, and victim reach."
-
-**[Action]** Show the radar chart briefly.
-
-**[Action]** Click the **"📅 Campaign Activity"** tab.
-
-> "And a Gantt timeline of all active campaigns."
+**Key line:**
+> "874 tests, zero failures. Every component verified — agents, API, stores, PDF generation, threat actor engine, data integrity. This is production-quality code."
 
 ---
 
-## Scene 8 — Closing (2:40–3:00)
+## Closing Statement (30 sec)
 
-**[Action]** Open a terminal and show `pytest tests/ --tb=short -q` (or show a previous run result).
-
-> "The platform ships with five hundred and eighty-eight tests across twenty-four
-> test files — unit, integration, and end-to-end coverage for every layer.
-> Pure compute functions, file-backed stores tested with monkeypatching, and
-> FastAPI endpoints tested against an in-memory SQLite database."
-
-**[Action]** Return to the browser. Show the Executive Dashboard one last time.
-
-> "Mythos is extensible by design. Adding a new agent is one class with one method.
-> Adding a new dashboard page is one file. Adding a new threat actor is one JSON
-> entry. The architecture scales from a single local process to a Docker Compose
-> stack with Postgres, Redis, Prometheus, and Grafana."
-
-> "Source code and full documentation at github.com/your-org/mythos."
-
-**[Fade out]**
+> "Mythos delivers a complete production SOC platform: 5-agent AI pipeline, 12-page live dashboard, FastAPI REST layer with JWT auth and RBAC, professional PDF generation, full MITRE ATT&CK integration, 23-actor threat intelligence, and 874 passing tests. The entire triage lifecycle — from raw alert to executive board report — automated and auditable."
 
 ---
 
-## Recording Tips
+## Condensed Version (6 min)
 
-- Use OBS Studio or QuickTime at 1920×1080 60fps
-- Record audio separately (Blue Yeti / Rode PodMic) and sync in post
-- Add subtle zoom animations when pointing at specific UI elements
-- Keep mouse movements slow and deliberate
-- Pause 0.5s before each voiceover sentence to allow cut points
-- Export at H.264, constant quality 18, for GitHub/YouTube upload
+| Act | Keep | Cut |
+|---|---|---|
+| 1 | Run pipeline, mention 5 agents | Skip detailed output narration |
+| 2 | Show KPI row + PDF download | Skip filter demo |
+| 3 | Show 3 tabs max (Status, Note, Report) | Skip escalation and activity feed |
+| 4 | Skip entirely | — |
+| 5 | Tab 1 + Tab 4 radar only | Skip campaign Gantt |
+| 6 | Executive PDF only | Skip dashboard filter demo |
+| 7 | Show test count only | — |
 
-## Thumbnail suggestion
+---
 
-Dark background · Mythos logo (if any) · "AI-Powered SOC Platform" subtitle · 11 dashboard page thumbnails in a grid · "588 tests · Python · FastAPI · Streamlit"
+## Troubleshooting
+
+| Symptom | Resolution |
+|---|---|
+| No incidents on page 1 | Run `python core/orchestrator.py` first |
+| Dashboard won't start | `pip install -r requirements.txt` |
+| PDF download fails | `pip install reportlab` |
+| Page 11 empty | Check `data/threat_profiles.json` exists |
+| Port conflict | `streamlit run dashboard/app.py --server.port 8502` |
+| Slow first load | MITRE ATT&CK engine loads lazily — first request takes ~2s |
